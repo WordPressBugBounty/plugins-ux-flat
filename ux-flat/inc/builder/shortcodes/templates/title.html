@@ -1,0 +1,186 @@
+<div class="container section-title-container {{shortcode.options.class}} {{shortcode.options.visibility}}"
+	ng-style="{
+	'margin-top': shortcode.options.marginTop, 
+	'margin-bottom': shortcode.options.marginBottom,
+    'max-width': shortcode.options.width,
+	'padding': shortcode.options.padding, 
+    'background': shortcode.options.bgColor,
+    'transform': 'skewX('+shortcode.options.bgTransform+'deg)',
+	'overflow': 'hidden'
+  }" ng-switch="shortcode.options.tagName">
+
+	<h2 ng-switch-when="h2" class="section-title section-title-{{shortcode.options.style}}" ng-style="{
+	'border-bottom-width': shortcode.options.bBorderWidth,
+    'border-bottom-style': shortcode.options.bBorderStyle,
+	'border-bottom-color': shortcode.options.bBorderColor,
+    'transform': 'skewX(-'+shortcode.options.bgTransform+'deg)'
+  }">
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<span class="section-title-main {{ shortcode.options.letterCase }}" ng-style="{
+	'margin': shortcode.options.boxMargin, 
+    'padding': shortcode.options.boxPadding,
+        'font-size': shortcode.options.size + '%', 
+        'color': shortcode.options.color, 
+        'border-radius': shortcode.options.boxRadius + 'px',
+        'border-bottom-width': shortcode.options.mBorderWidth,
+        'border-bottom-color': shortcode.options.mBorderColor,
+        'background': shortcode.options.boxColor
+        }">
+		<i ng-if="shortcode.options.icon" class="{{ shortcode.options.icon }}"></i>
+		{{shortcode.options.text}}
+        <small ng-if="shortcode.options.subText" class="sub-title">{{shortcode.options.subText}}</small>
+		</span>
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<a ng-if="shortcode.options.linkText" href="" ng-style="{'color': shortcode.options.color">{{shortcode.options.linkText}}</a>
+	</h2>
+    
+	<h3 ng-switch-when="h3" class="section-title section-title-{{shortcode.options.style}}" ng-style="{
+	'border-bottom-width': shortcode.options.bBorderWidth,
+    'border-bottom-style': shortcode.options.bBorderStyle,
+	'border-bottom-color': shortcode.options.bBorderColor,
+    'transform': 'skewX(-'+shortcode.options.bgTransform+'deg)'
+  }">
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<span class="section-title-main {{ shortcode.options.letterCase }}" ng-style="{
+	'margin': shortcode.options.boxMargin, 
+    'padding': shortcode.options.boxPadding,
+        'font-size': shortcode.options.size + '%', 
+        'color': shortcode.options.color, 
+        'border-radius': shortcode.options.boxRadius + 'px',
+        'border-bottom-width': shortcode.options.mBorderWidth,
+        'border-bottom-color': shortcode.options.mBorderColor,
+        'background': shortcode.options.boxColor
+        }">
+		<i ng-if="shortcode.options.icon" class="{{ shortcode.options.icon }}"></i>
+		{{shortcode.options.text}}
+        <small ng-if="shortcode.options.subText" class="sub-title">{{shortcode.options.subText}}</small>
+		</span>
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<a ng-if="shortcode.options.linkText" href="" ng-style="{'color': shortcode.options.color">{{shortcode.options.linkText}}</a>
+	</h3>
+    
+	<h4 ng-switch-when="h4" class="section-title section-title-{{shortcode.options.style}}" ng-style="{
+	'border-bottom-width': shortcode.options.bBorderWidth,
+    'border-bottom-style': shortcode.options.bBorderStyle,
+	'border-bottom-color': shortcode.options.bBorderColor,
+    'transform': 'skewX(-'+shortcode.options.bgTransform+'deg)'
+  }">
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<span class="section-title-main {{ shortcode.options.letterCase }}" ng-style="{
+	'margin': shortcode.options.boxMargin, 
+    'padding': shortcode.options.boxPadding,
+        'font-size': shortcode.options.size + '%', 
+        'color': shortcode.options.color, 
+        'border-radius': shortcode.options.boxRadius + 'px',
+        'border-bottom-width': shortcode.options.mBorderWidth,
+        'border-bottom-color': shortcode.options.mBorderColor,
+        'background': shortcode.options.boxColor
+        }">
+		<i ng-if="shortcode.options.icon" class="{{ shortcode.options.icon }}"></i>
+		{{shortcode.options.text}}
+        <small ng-if="shortcode.options.subText" class="sub-title">{{shortcode.options.subText}}</small>
+		</span>
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<a ng-if="shortcode.options.linkText" href="" ng-style="{'color': shortcode.options.color">{{shortcode.options.linkText}}</a>
+	</h4>
+    
+	<h5 ng-switch-when="h5" class="section-title section-title-{{shortcode.options.style}}" ng-style="{
+	'border-bottom-width': shortcode.options.bBorderWidth,
+    'border-bottom-style': shortcode.options.bBorderStyle,
+	'border-bottom-color': shortcode.options.bBorderColor,
+    'transform': 'skewX(-'+shortcode.options.bgTransform+'deg)'
+  }">
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<span class="section-title-main {{ shortcode.options.letterCase }}" ng-style="{
+	'margin': shortcode.options.boxMargin, 
+    'padding': shortcode.options.boxPadding,
+        'font-size': shortcode.options.size + '%', 
+        'color': shortcode.options.color, 
+        'border-radius': shortcode.options.boxRadius + 'px',
+        'border-bottom-width': shortcode.options.mBorderWidth,
+        'border-bottom-color': shortcode.options.mBorderColor,
+        'background': shortcode.options.boxColor
+        }">
+		<i ng-if="shortcode.options.icon" class="{{ shortcode.options.icon }}"></i>
+		{{shortcode.options.text}}
+        <small ng-if="shortcode.options.subText" class="sub-title">{{shortcode.options.subText}}</small>
+		</span>
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<a ng-if="shortcode.options.linkText" href="" ng-style="{'color': shortcode.options.color">{{shortcode.options.linkText}}</a>
+	</h5>
+    
+	<h6 ng-switch-when="h6" class="section-title section-title-{{shortcode.options.style}}" ng-style="{
+	'border-bottom-width': shortcode.options.bBorderWidth,
+    'border-bottom-style': shortcode.options.bBorderStyle,
+	'border-bottom-color': shortcode.options.bBorderColor,
+    'transform': 'skewX(-'+shortcode.options.bgTransform+'deg)'
+  }">
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<span class="section-title-main {{ shortcode.options.letterCase }}" ng-style="{
+	'margin': shortcode.options.boxMargin, 
+    'padding': shortcode.options.boxPadding,
+        'font-size': shortcode.options.size + '%', 
+        'color': shortcode.options.color, 
+        'border-radius': shortcode.options.boxRadius + 'px',
+        'border-bottom-width': shortcode.options.mBorderWidth,
+        'border-bottom-color': shortcode.options.mBorderColor,
+        'background': shortcode.options.boxColor
+        }">
+		<i ng-if="shortcode.options.icon" class="{{ shortcode.options.icon }}"></i>
+		{{shortcode.options.text}}
+        <small ng-if="shortcode.options.subText" class="sub-title">{{shortcode.options.subText}}</small>
+		</span>
+		<b ng-style="{
+	'height': shortcode.options.bHeight,
+	'background': shortcode.options.bBgColor,
+    'opacity': shortcode.options.bOpacity,
+	'transform': 'rotate(-'+shortcode.options.bTransform+'deg)'
+  }"></b>
+		<a ng-if="shortcode.options.linkText" href="" ng-style="{'color': shortcode.options.color">{{shortcode.options.linkText}}</a>
+	</h6>
+</div>

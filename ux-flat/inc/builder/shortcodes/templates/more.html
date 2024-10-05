@@ -1,0 +1,18 @@
+<div id="{{:: shortcode.$id }}" class="mb {{ shortcode.options.class }} {{ shortcode.options.visibility }}">
+    <details open>
+        <summary>
+            <span class="button icon is-{{ shortcode.options.style }} {{ shortcode.options.color }}" ng-class="{ 'round': shortcode.options.round === 'true' }">
+                <span>{{ shortcode.options.text }}</span>
+                <i class="icon-expand"></i>
+            </span>
+        </summary>
+        <content></content>
+    </details>
+    <style scope="scope">
+        #{{:: shortcode.$id }} details[open] summary ~ * { -webkit-animation: stuckFadeIn .6s; animation: stuckFadeIn .6s; }
+        #{{:: shortcode.$id }} details[open]:before { background-image: unset; height: auto; }
+        #{{:: shortcode.$id }} details { position: relative; }
+        #{{:: shortcode.$id }} summary { text-align: center; width: 100%; cursor: pointer; top: 0; position: absolute; z-index:999;}
+        #{{:: shortcode.$id }} details:before { content: ""; position: absolute; bottom: 100%; height: {{ shortcode.options.height }}; left: 0; background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0), {{ shortcode.options.bgcolor }}); width: 100%; }
+    </style>
+</div>

@@ -1,0 +1,24 @@
+<div id="el_{{::$id}}"
+  class="
+    {{ shortcode.options.class }}
+    {{ shortcode.options.visibility }}
+    x{{ shortcode.options.positionX }}
+    md-x{{ shortcode.options.positionX }}
+    lg-x{{ shortcode.options.positionX }}
+    y{{ shortcode.options.positionY }}
+    md-y{{ shortcode.options.positionY }}
+    lg-y{{ shortcode.options.positionY }}
+  " ng-class="{'has-hover-effect' : shortcode.options.hover}" ng-style="{
+    'margin': shortcode.options.borderMargin,
+    'border': '1px dashed #ff2200',
+    'background-color': shortcode.options.bgColor,
+    'position': shortcode.options.pos,
+    'z-index': shortcode.options.zindex,
+    }"><h6 ng-style="{'color':'#FFF', 'background-color':'#FF2200', 'width':'100%', 'text-align':'center'}">{{ shortcode.options.text }}</h6>
+	    	<content></content>
+	</div>
+	<style scope="scope">
+		#el_{{::$id}}{ width: {{ shortcode.options.width }}%; }
+		#el_{{::$id}} { margin: {{ shortcode.options.margin }}; }
+	</style>
+</div>

@@ -1,0 +1,28 @@
+<div id="slider-{{::$id}}" class="slider-wrapper relative slider-type-{{ shortcode.options.type }} {{ shortcode.options.visibility }} {{ shortcode.options.class }}">
+
+    <div class="slider slider-auto-height slider-nav-{{ shortcode.options.navPos }}  slider-nav-{{ shortcode.options.navPosition }} slider-nav-{{ shortcode.options.navSize }} slider-style-{{ shortcode.options.style }} slider-nav-{{ shortcode.options.navColor }} slider-nav-{{ shortcode.options.navStyle }} slider-nav-dots-{{ shortcode.options.bulletStyle }} is-draggable"
+    ng-class="{'slider-show-nav' : shortcode.options.hideNav}">
+        <content></content>
+    </div>
+
+    <style scope="scope">
+    	#slider-{{::$id}} {margin-bottom: {{ shortcode.options.margin }}; }
+    	#slider-{{::$id}} { background-color: {{ shortcode.options.bgColor }}; }
+        #slider-{{::$id}} .flickity-slider > *{ max-width: {{ shortcode.options.slideWidth }}!important; }
+        #slider-{{::$id}} .img-inner, #slider-{{::$id}} .banner { border-radius: {{ shortcode.options.slideRadius }}px; }
+        #slider-{{::$id}} .banner { overflow: {{ shortcode.options.slideOverflow }}; }
+        #slider-{{::$id}} .flickity-prev-next-button svg { background-color: {{ shortcode.options.navInvert }}; border-radius: {{ shortcode.options.navRadius }}px; }
+        #slider-{{::$id}} .slider-nav-top-left .flickity-prev-next-button { top: 5% !important; bottom: unset !important; } 
+        #slider-{{::$id}} .slider-nav-top-left .flickity-prev-next-button.next { left: 5% !important; }
+        #slider-{{::$id}} .slider-nav-top-right .flickity-prev-next-button { top: 5% !important; bottom: unset !important; } 
+        #slider-{{::$id}} .slider-nav-top-right .flickity-prev-next-button.previous { left: unset !important; right: 5% !important; }
+        #slider-{{::$id}} .slider-nav-bottom-left .flickity-prev-next-button { top: unset !important; bottom: 5% !important } 
+        #slider-{{::$id}} .slider-nav-bottom-left .flickity-prev-next-button.next { left: 5% !important; }
+        #slider-{{::$id}} .slider-nav-bottom-center .flickity-prev-next-button { top: unset !important; bottom: 5% !important; left: 50% !important; } 
+        #slider-{{::$id}} .slider-nav-bottom-center .flickity-prev-next-button, .slider-nav-outside .flickity-prev-next-button.next { left: 50% !important; } 
+        #slider-{{::$id}} .slider-nav-bottom-center .flickity-prev-next-button.previous, .slider-nav-outside .flickity-prev-next-button.previous { left: 47% !important; }
+        #slider-{{::$id}} .slider-nav-bottom-center .slider-nav-outside .flickity-prev-next-button { bottom: -50px !important; }
+        #slider-{{::$id}} .slider-nav-bottom-right .flickity-prev-next-button { top: unset !important; bottom: 5% !important } 
+        #slider-{{::$id}} .slider-nav-bottom-right .flickity-prev-next-button.previous { left: unset !important; right: 5% !important; }
+    </style>
+</div>
