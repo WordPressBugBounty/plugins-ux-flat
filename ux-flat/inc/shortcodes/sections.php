@@ -1,4 +1,9 @@
 <?php
+// Register scripts
+function uxf_section_scripts() {
+    wp_register_style('effectcss', plugins_url('/assets/css/effect.min.css', UXF_FILE), [], null);
+}
+add_action('wp_enqueue_scripts', 'uxf_section_scripts');
 
 function uxf_section( $atts, $content = null ) {
 	$atts = shortcode_atts( array(
@@ -66,12 +71,12 @@ function uxf_section( $atts, $content = null ) {
 		'border_radius'    => '',
 		'border_style'     => '',
 		// UX Flat
-		'bg_gradient'               => '',
-		'bg_gradient_to'            => 'left',
-		'bg_radius'        => '',
-		'bg_overflow'        => '',
-		'bg_repeat'        => '',
-		'bg_cover'          => '',
+		'bg_gradient'   => '',
+		'bg_gradient_to'    => 'left',
+		'bg_css'        => '',
+		'bg_radius'     => '',
+		'bg_repeat'     => '',
+		'bg_cover'      => '',
 	), $atts );
 
 	extract( $atts );
@@ -122,13 +127,14 @@ function uxf_section( $atts, $content = null ) {
 	}
 
 	// Add Parallax.
-	if ( $parallax ) {
+	if ( $parallax || $bg_radius ) {
 		$classes[] = 'has-parallax';
 	}
 
 	// Background effects.
 	if ( $effect ) {
-		wp_enqueue_style( 'uxf-effect' );
+		wp_enqueue_style( 'flatsome-effects' );
+		wp_enqueue_style( 'effectcss' );
 	}
 
 	// Add Full Height Class.
@@ -221,10 +227,6 @@ function uxf_section( $atts, $content = null ) {
                     'property' => 'border-radius',
                     'unit'     => 'px',
                 ),
-                'bg_overflow'     => array(
-                    'selector' => '',
-                    'property' => 'overflow',
-                ),
 			) );
 		}
 
@@ -280,18 +282,13 @@ function uxf_section( $atts, $content = null ) {
 		}
 		echo ux_builder_element_style_tag( $_id, $args, $atts ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
-    <?php if($effect == "sliding"){ ?>
-    <style>
-    <?php echo '#'.esc_attr($_id); ?> .effect-sliding li:nth-of-type(1),<?php echo '#'.esc_attr($_id); ?> .effect-sliding li:nth-of-type(2),<?php echo '#'.esc_attr($_id); ?> .effect-sliding li:nth-of-type(3) {
-      background-image: linear-gradient(-60deg, <?php echo esc_attr($bg_color); ?> 50%, <?php echo esc_attr($bg_gradient); ?> 50%);
-    }
-    </style>
-    <?php } ?>
 	</section>
+    <?php if($bg_css) { ?>
+    <style><?php echo '#'.esc_attr($_id); ?> {<?php echo wp_kses_post($bg_css); ?>}</style>
+    <?php } ?>
 	<?php
 	$content = ob_get_contents();
 	ob_end_clean();
-
 	return do_shortcode( $content );
 }
 add_shortcode('background', 'uxf_section');

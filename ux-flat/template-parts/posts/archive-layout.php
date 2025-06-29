@@ -3,7 +3,7 @@
  * Category layout.
  *
  * @package          Flatsome\Templates
- * @flatsome-version 3.16.0
+ * @flatsome-version 3.19.0
  */
 
 get_header();
@@ -26,7 +26,7 @@ do_action('flatsome_before_blog');
     } ?>
     <?php if (get_theme_mod('uxf_category_layout') && $layout) { ?>
         <?php get_template_part( 'template-parts/posts/archive', $layout ); ?>
-    <?php } elseif (get_theme_mod('uxf_archive_layout')) { ?>
+    <?php } elseif ( $archive_layout = get_theme_mod('blog_archive_layout')) { ?>
         <?php if ( have_posts() ) : ?>
             <div id="post-list">
                 <?php
@@ -37,11 +37,9 @@ do_action('flatsome_before_blog');
                 $ids = implode( ',', $ids );
                 ?>
                 <?php
-                    $uxf_blog_shortcode = get_theme_mod('uxf_blog_shortcode');
-                    $uxf_post_shortcode = str_replace("]", " ids='{$ids}']", $uxf_blog_shortcode);
-                    echo do_shortcode($uxf_post_shortcode);
+                    $post_sc = str_replace("blog_posts", "blog_posts ids='{$ids}'", $archive_layout);
+                    echo do_shortcode($post_sc);
                 ?>
-
                 <?php flatsome_posts_pagination(); ?>
             </div>
         <?php else : ?>

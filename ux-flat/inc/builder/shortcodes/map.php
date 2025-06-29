@@ -5,7 +5,7 @@ add_ux_builder_shortcode( 'map', array(
   'name' => __( 'Map' ),
   'category' => __( 'Content' ),
   'thumbnail' => get_template_directory_uri() . '/inc/builder/shortcodes/thumbnails/map.svg',
-  'template' => flatsome_uxf_builder_template( 'map.html' ),
+  'template' => uxf_builder_template( 'map.html' ),
   'wrap' => false,
   'presets' => array(
     array(
@@ -71,6 +71,7 @@ add_ux_builder_shortcode( 'map', array(
             'format' => 'rgb',
             'default' => '#fff',
             'position' => 'bottom right',
+            'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
           ),
           'content_width' => array(
             'type' => 'slider',
@@ -140,15 +141,20 @@ add_ux_builder_shortcode( 'map', array(
           'type' => 'colorpicker',
           'heading' => 'Color',
           'default' => '',
-          'format' => 'hex',
           'position' => 'bottom right',
+            'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
         ),
         'saturation' => array(
           'type' => 'slider',
           'heading' => 'Saturation',
-          'default' => -30,
+          'default' => '',
           'max' => 100,
-          'min' => -100,
+          'min' => 0,
+        ),
+        'invert' => array(
+          'type' => 'checkbox',
+          'heading' => __( 'Invert' ),
+          'default' => '',
         ),
       ),
     ),

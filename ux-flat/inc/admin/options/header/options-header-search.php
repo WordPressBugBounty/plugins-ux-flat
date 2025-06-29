@@ -1,17 +1,16 @@
 <?php
-Flatsome_Option::add_field( '', array(
-	'type'     => 'custom',
-	'settings' => 'custom_uxfheadersearch',
-	'section'  => 'header_search',
-	'default'  => '<div class="options-title-divider">UXF Options</div>',
-));
-
 Flatsome_Option::add_field( 'option',  array(
-  'type'        => 'textarea',
-  'settings'     => 'search_typing',
-  'transport' => 'postMessage',
-  'label'       => __( 'Search multiple', 'flatsome-admin' ),
-  'description'       => __( 'Change the search multiple field placeholder.', 'flatsome-admin' ),
-  'section'     => 'header_search',
-  'placeholder' => 'Search...',
+    'type'        => 'textarea',
+    'settings'    => 'search_typing',
+    'label'       => __( 'Multi-line Placeholder', 'ux-flat' ),
+    'tooltip'  => __( 'Enabled' ).': UXF → Typed',
+    'section'     => 'header_search',
+    'active_callback' => array(
+        array(
+            'setting'  => 'search_placeholder',
+            'operator' => '!=',
+            'value'    => '',
+        ),
+    ),
+	'default'     => '',
 ));

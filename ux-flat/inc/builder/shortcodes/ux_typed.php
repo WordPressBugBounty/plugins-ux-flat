@@ -7,7 +7,7 @@ add_ux_builder_shortcode( 'ux_typed', array(
 	'compile'   => false,
 	'overlay'   => true,
 	'thumbnail' => flatsome_uxf_builder_thumbnail( 'ux_typed' ),
-	'template'  => flatsome_uxf_builder_template( 'ux_typed.html' ),
+	'template'  => uxf_builder_template( 'ux_typed.html' ),
 	'priority'  => 3,
     'scripts' => array(
       'typedjs' => UXF_URL . 'assets/js/typed.umd.js',
@@ -103,6 +103,6 @@ add_ux_builder_shortcode( 'ux_typed', array(
 				),
 			),
 		),
-		'advanced_options' => require( UXF_PATH . '/inc/builder/shortcodes/commons/advanced.php'),
+		'advanced_options' => require( UXF_DIR . '/inc/builder/shortcodes/commons/advanced.php'),
 	),
 ) );

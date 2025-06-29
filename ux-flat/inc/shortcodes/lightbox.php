@@ -3,7 +3,7 @@
 /**
  * [lightbox]
  */
-function ux_lightbox( $atts, $content = null ) {
+function uxf_lightbox( $atts, $content = null ) {
 	extract( shortcode_atts( array(
 		'id'         => 'enter-id-here',
 		'width'      => '650px',
@@ -75,4 +75,4 @@ function ux_lightbox( $atts, $content = null ) {
 	return $content;
 }
 
-add_shortcode( 'lightbox', 'ux_lightbox' );
+add_shortcode( 'lightbox', 'uxf_lightbox' );

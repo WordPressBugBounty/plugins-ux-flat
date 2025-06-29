@@ -105,6 +105,17 @@ return array(
 	     ),
      ),
      
+    'show' => array(
+        'type' => 'select',
+        'heading' => __( 'Show' ),
+        'default' => '',
+        'options' => array(
+            '' => 'All',
+            'featured' => __('Featured'),
+            'notfeatured' => __('NOT Featured'),
+        )
+    ),
+     
 	'author' => array(
 		'type' => 'select',
 		'heading' => __( 'Author' ),

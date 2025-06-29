@@ -1,14 +1,17 @@
-<div class="google-map relative mb {{ shortcode.options.class }} {{ shortcode.options.visibility }}" style="overflow:hidden; margin:0 auto; position: relative;">
-    <div id="map_{{:: shortcode.$id }}" class="map-height" style="padding-top:1px !important;">
-        <iframe 
-            src="https://maps.google.com/maps?q={{ shortcode.options.lat }},{{ shortcode.options.long }}&hl=en;z={{ shortcode.options.zoom }}&amp;output=embed"
+<div class="google-map relative mb {{ shortcode.options.class }} {{ shortcode.options.visibility }}">
+    <div id="map_{{:: shortcode.$id }}" class="map-height" style="height:{{ shortcode.options.height }}">
+    <iframe 
+            src="https://maps.google.com/maps?z=17&output=embed&ll=40.79028,-73.95972"
             width="100%"
             frameborder="0"
             style="height:{{ shortcode.options.height }}; width:100%;  padding:0 !important;"
             allowfullscreen=""
             >
         </iframe>
-    </div>
+        </div>
+    <div class="map_overlay"></div>
+    <div id="map_overlay_top"></div>
+    <div id="map_overlay_bottom"></div>
     <div ng-if="shortcode.options.contentEnable" class="absolute map-inner last-reset map_inner
     x{{ shortcode.options.positionX }} md-x{{ shortcode.options.positionX }} lg-x{{ shortcode.options.positionX }} y{{ shortcode.options.positionY }} md-y{{ shortcode.options.positionY }} lg-y{{ shortcode.options.positionY }}"
         style="width: {{ shortcode.options.contentWidth }}%; background-color: {{ shortcode.options.contentBg }}"
@@ -16,3 +19,4 @@
         <content></content>
     </div>
 </div>
+

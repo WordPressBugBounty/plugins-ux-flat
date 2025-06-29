@@ -3,18 +3,10 @@
 add_ux_builder_shortcode( 'title', array(
 	'name'      => __( 'Title', 'ux-builder' ),
 	'category'  => __( 'Content' ),
-	'template'  => flatsome_uxf_builder_template( 'title.html' ),
+	'template'  => uxf_builder_template( 'title.html' ),
     'thumbnail' => get_template_directory_uri() . '/inc/builder/shortcodes/thumbnails/title.svg',
 	'info'      => '{{ text }}',
 	'wrap'      => false,
-    'styles' => array(
-      'uxf-animate' => UXF_URL . 'assets/css/animate.min.css',
-      'uxf-hover' => UXF_URL . 'assets/css/hover.min.css'
-    ),
-    'scripts' => array(
-      'uxf-anidynamic' => UXF_URL . 'assets/js/animate.min.js',
-    ),
-
 	'options' => array(
 		'style' => array(
 			'type'    => 'select',
@@ -47,13 +39,11 @@ add_ux_builder_shortcode( 'title', array(
 					'heading' => 'Tag',
 					'default' => 'h3',
 					'options' => array(
+						'h1' => 'H1',
 						'h2' => 'H2',
 						'h3' => 'H3',
 						'h4' => 'H4',
-						'h5' => 'H5',
-						'h6' => 'H6',
 						'p' => 'P',
-						'div' => 'DIV',
 					),
 				),
 				'icon' => array(

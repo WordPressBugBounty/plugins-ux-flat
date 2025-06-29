@@ -3,7 +3,7 @@ add_ux_builder_shortcode( 'module', array(
     'type' => 'container',
     'name' => __( 'Module' ),
     'category' => __( 'UX Flat' ),
-    'template' => flatsome_uxf_builder_template( 'module.html' ),
+    'template' => uxf_builder_template( 'module.html' ),
     'thumbnail' =>  flatsome_uxf_builder_thumbnail( 'module' ),
     'info' => '{{ text }}',
     'wrap' => false,
@@ -15,20 +15,15 @@ add_ux_builder_shortcode( 'module', array(
         'heading' => __( 'Layout' ),
         'options' => array(
             'sticky' => array(
-                'type' => 'radio-buttons',
+                'type' => 'checkbox',
                 'heading' => __('Sticky Column'),
-                'default' => '',
-                'options' => array(
-                    ''  => array( 'title' => 'Off'),
-                    'true'  => array( 'title' => 'On'),
-                ),
             ),
             'position' => array(
                 'type' => 'select',
                 'heading'    => __('Position'),
                 'default' => '',
                 'options' => array(
-                    '' => 'Unset',
+                    '' => 'unset',
                     'absolute' => 'absolute',
                     'relative' => 'relative',
                     'fixed' => 'fixed',
@@ -87,14 +82,23 @@ add_ux_builder_shortcode( 'module', array(
                     'dark'  => array( 'title' => 'Dark'),
                 ),
             ),
+			'close'  => array(
+				'type'    => 'checkbox',
+				'heading' => 'Close Button',
+			),
             'width' => array(
-                'type' => 'slider',
+                'type' => 'scrubfield',
                 'heading' => __('Width'),
                 'responsive' => true,
-                'default' => '',
-                'unit' => '%',
-                'max' => '100',
-                'min' => '0',
+                'min'        => 0,
+                'max'        => 1000,
+            ),
+            'height'          => array(
+                'type'       => 'scrubfield',
+                'heading'    => __('Height'),
+                'responsive' => true,
+                'min'        => 0,
+                'max'        => 1000,
             ),
            'margin' => array(
               'type' => 'margins',
@@ -122,12 +126,6 @@ add_ux_builder_shortcode( 'module', array(
               'max' => 180,
               'min' => -180,
             ),
-           'animate' => array(
-              'type' => 'select',
-              'heading' => __('Animate'),
-              'default' => '',
-              'options' => require( get_template_directory() . '/inc/builder/shortcodes/values/animate.php' ),
-          ),
         ),
     ),
     'text_options' => array(
@@ -158,23 +156,22 @@ add_ux_builder_shortcode( 'module', array(
         'type' => 'group',
         'heading' => __( 'Background' ),
         'options' => array(
-
           'bg' => array(
             'type' => 'colorpicker',
             'heading' => __('BG Color'),
             'alpha' => true,
             'format' => 'rgb',
             'position' => 'bottom right',
+            'helpers' => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
           ),
-          'opacity' => array(
-              'type'    => 'radio-buttons',
+            'touch'  => array(
+                'type'    => 'checkbox',
+                'heading' => 'Touch Mobile',
+            ),
+            'opacity' => array(
+              'type'    => 'checkbox',
               'heading' => 'Opacity',
-              'default' => '',
-              'options' => array(
-                  ''     => array( 'title' => 'Off' ),
-                  'true' => array( 'title' => 'On' ),
-              ),
-          ),
+            ),
             'radius' => array(
               'type' => 'slider',
               'heading' => __('Radius'),

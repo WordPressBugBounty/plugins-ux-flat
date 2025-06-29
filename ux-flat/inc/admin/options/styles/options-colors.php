@@ -4,13 +4,41 @@ Flatsome_Option::add_field( '', array(
 	'type'     => 'custom',
 	'settings' => 'custom_uxfcolors',
 	'section'  => 'colors',
-	'default'  => '<div class="options-title-divider">UXF Options</div>',
+    'default'  => '<div class="options-title-divider" style="background: #00a0d2;">UX Flat</div>',
+));
+
+Flatsome_Option::add_field( 'option',  array(
+	'type'        => 'checkbox',
+	'settings'     => 'tooltips',
+	'label'       => __('Disabled Tooltips', 'ux-flat'),
+	'section'     => 'colors',
+	'default'     => 0,
+));
+
+Flatsome_Option::add_field( 'option',  array(
+	'type'        => 'slider',
+	'settings'     => 'tooltips_size',
+	'label'       => __( 'Tooltip Size', 'ux-flat' ),
+	'section'     => 'colors',
+	'default'     => 14,
+	'active_callback' => array(
+		array(
+			'setting'  => 'tooltips',
+			'operator' => '!==',
+			'value'    => true,
+		),
+	),
+	'choices'     => array(
+		'min'  => 8,
+		'max'  => 16,
+		'step' => 1
+	),
 ));
 
 Flatsome_Option::add_field( 'option',  array(
 	'type'        => 'checkbox',
 	'settings'     => 'uxf_boxshadow',
-	'label'       => __( 'Enable Box Shadow', 'flatsome-admin' ),
+	'label'       => 'Box Shadow',
 	'section'     => 'colors',
 	'default'     => 0,
 ));
@@ -18,7 +46,7 @@ Flatsome_Option::add_field( 'option',  array(
 Flatsome_Option::add_field( 'option',  array(
 	'type'        => 'slider',
 	'settings'     => 'uxf_boxshadow_horizontal',
-	'label'       => __( 'Horizontal Offset', 'flatsome-admin' ),
+	'label'       => __( 'Horizontal Offset', 'ux-flat' ),
 	'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -38,7 +66,7 @@ Flatsome_Option::add_field( 'option',  array(
 Flatsome_Option::add_field( 'option',  array(
 	'type'        => 'slider',
 	'settings'     => 'uxf_boxshadow_vertical',
-	'label'       => __( 'Vertical Offset', 'flatsome-admin' ),
+	'label'       => __( 'Vertical Offset', 'ux-flat' ),
 	'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -58,7 +86,7 @@ Flatsome_Option::add_field( 'option',  array(
 Flatsome_Option::add_field( 'option',  array(
 	'type'        => 'slider',
 	'settings'     => 'uxf_boxshadow_blur',
-	'label'       => __( 'Blur Radius', 'flatsome-admin' ),
+	'label'       => __( 'Blur Radius', 'ux-flat' ),
 	'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -78,7 +106,7 @@ Flatsome_Option::add_field( 'option',  array(
 Flatsome_Option::add_field( 'option',  array(
 	'type'        => 'slider',
 	'settings'     => 'uxf_boxshadow_spread',
-	'label'       => __( 'Spread Radius', 'flatsome-admin' ),
+	'label'       => __( 'Spread Radius', 'ux-flat' ),
 	'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -96,10 +124,13 @@ Flatsome_Option::add_field( 'option',  array(
 ));
 
 Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
+	'type'        => 'color',
+    'choices'     => [
+        'alpha' => true,
+    ],
     'alpha' => true,
     'settings'     => 'uxf_boxshadow_1',
-    'label'       => __( 'Box Shadow Color 1', 'flatsome-admin' ),
+    'label'       => __( 'Box Shadow Color 1', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -112,10 +143,12 @@ Flatsome_Option::add_field( 'option',  array(
 ));
 
 Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
+	'type'        => 'color',
+    'choices'     => [
+        'alpha' => true,
+    ],
     'settings'     => 'uxf_boxshadow_2',
-    'label'       => __( 'Box Shadow Color 2', 'flatsome-admin' ),
+    'label'       => __( 'Box Shadow Color 2', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -128,8 +161,10 @@ Flatsome_Option::add_field( 'option',  array(
 ));
 
 Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
+	'type'        => 'color',
+    'choices'     => [
+        'alpha' => true,
+    ],
     'settings'     => 'uxf_boxshadow_3',
 	'active_callback' => array(
 		array(
@@ -138,14 +173,16 @@ Flatsome_Option::add_field( 'option',  array(
 			'value'    => true,
 		),
 	),
-    'label'       => __( 'Box Shadow Color 3', 'flatsome-admin' ),
+    'label'       => __( 'Box Shadow Color 3', 'ux-flat' ),
     'section'     => 'colors',
 	'default'     => 'rgba(0,51,90,.19)',
 ));
 
 Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
+	'type'        => 'color',
+    'choices'     => [
+        'alpha' => true,
+    ],
     'settings'     => 'uxf_boxshadow_4',
 	'active_callback' => array(
 		array(
@@ -154,14 +191,16 @@ Flatsome_Option::add_field( 'option',  array(
 			'value'    => true,
 		),
 	),
-    'label'       => __( 'Box Shadow Color 4', 'flatsome-admin' ),
+    'label'       => __( 'Box Shadow Color 4', 'ux-flat' ),
     'section'     => 'colors',
 	'default'     => 'rgba(0,51,90,.25)',
 ));
 
 Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
+	'type'        => 'color',
+    'choices'     => [
+        'alpha' => true,
+    ],
     'settings'     => 'uxf_boxshadow_5',
 	'active_callback' => array(
 		array(
@@ -170,187 +209,15 @@ Flatsome_Option::add_field( 'option',  array(
 			'value'    => true,
 		),
 	),
-    'label'       => __( 'Box Shadow Color 5', 'flatsome-admin' ),
+    'label'       => __( 'Box Shadow Color 5', 'ux-flat' ),
     'section'     => 'colors',
 	'default'     => 'rgba(0,51,90,.3)',
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'checkbox',
-	'settings'     => 'uxf_textshadow',
-	'label'       => __( 'Enable Text Shadow', 'flatsome-admin' ),
-	'section'     => 'colors',
-	'default'     => 0,
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'slider',
-	'settings'     => 'uxf_textshadow_horizontal',
-	'label'       => __( 'Horizontal Length', 'flatsome-admin' ),
-	'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 4,
-	'choices'     => array(
-		'min'  => '-100',
-		'max'  => 100,
-		'step' => 1
-	),
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'slider',
-	'settings'     => 'uxf_textshadow_vertical',
-	'label'       => __( 'Vertical Length', 'flatsome-admin' ),
-	'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 4,
-	'choices'     => array(
-		'min'  => '-100',
-		'max'  => 100,
-		'step' => 1
-	),
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'slider',
-	'settings'     => 'uxf_textshadow_blur',
-	'label'       => __( 'Blur Radius', 'flatsome-admin' ),
-	'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 2,
-	'choices'     => array(
-		'min'  => 0,
-		'max'  => 100,
-		'step' => 1
-	),
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
-    'settings'     => 'uxf_textshadow_1',
-    'label'       => __( 'Text Shadow Color 1', 'flatsome-admin' ),
-    'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 'rgba(0, 0, 0, .2)',
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
-    'settings'     => 'uxf_textshadow_2',
-    'label'       => __( 'Text Shadow Color 2', 'flatsome-admin' ),
-    'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 'rgba(0, 0, 0, .3)',
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
-    'settings'     => 'uxf_textshadow_3',
-    'label'       => __( 'Text Shadow Color 3', 'flatsome-admin' ),
-    'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 'rgba(0, 0, 0, .4)',
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
-    'settings'     => 'uxf_textshadow_4',
-    'label'       => __( 'Text Shadow Color 4', 'flatsome-admin' ),
-    'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 'rgba(0, 0, 0, .5)',
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'color-alpha',
-    'alpha' => true,
-    'settings'     => 'uxf_textshadow_5',
-    'label'       => __( 'Text Shadow Color 5', 'flatsome-admin' ),
-    'section'     => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_textshadow',
-			'operator' => '===',
-			'value'    => true,
-		),
-	),
-	'default'     => 'rgba(0, 0, 0, .6)',
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'     => 'checkbox',
-	'settings' => 'uxf_scrollbar',
-	'label'    => __( 'Scrollbar Chrome', 'flatsome-admin' ),
-	'section'  => 'colors',
-	'default'  => 0,
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'     => 'checkbox',
-	'settings' => 'uxf_social',
-	'label'    => __( 'Social Icons Hover', 'flatsome-admin' ),
-	'section'  => 'colors',
-	'default'  => 0,
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'        => 'color',
-    'settings'    => 'uxf_tag_hover',
-    'label'       => __( 'Tag Background Hover', 'flatsome-admin' ),
-    'section'     => 'colors',
-	'default'     => '',
 ));
 
 Flatsome_Option::add_field( 'option', array(
 	'type'     => 'checkbox',
 	'settings' => 'uxf_pagination',
-	'label'    => __( 'Pagination Style', 'flatsome-admin' ),
+	'label'    => __( 'Pagination', 'ux-flat' ),
 	'section'  => 'colors',
 	'default'  => 0,
 ));
@@ -358,7 +225,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'color',
     'settings'    => 'uxf_pagination_color',
-    'label'       => __( 'Color', 'flatsome-admin' ),
+    'label'       => __( 'Color', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -373,7 +240,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'color',
     'settings'    => 'uxf_pagination_bgcolor',
-    'label'       => __( 'Background Color', 'flatsome-admin' ),
+    'label'       => __( 'Background Color', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -388,7 +255,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'color',
     'settings'    => 'uxf_pagination_border',
-    'label'       => __( 'Border Color', 'flatsome-admin' ),
+    'label'       => __( 'Border Color', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -403,7 +270,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'color',
     'settings'    => 'uxf_pagination_hovercolor',
-    'label'       => __( 'Hover Color', 'flatsome-admin' ),
+    'label'       => __( 'Hover Color', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -418,7 +285,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'color',
     'settings'    => 'uxf_pagination_hoverbgcolor',
-    'label'       => __( 'Hover Background Color', 'flatsome-admin' ),
+    'label'       => __( 'Hover Background Color', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -433,7 +300,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'color',
     'settings'    => 'uxf_pagination_hoverbgborder',
-    'label'       => __( 'Hover Border', 'flatsome-admin' ),
+    'label'       => __( 'Hover Border', 'ux-flat' ),
     'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -448,7 +315,7 @@ Flatsome_Option::add_field( 'option', array(
 Flatsome_Option::add_field( 'option',  array(
 	'type'        => 'slider',
 	'settings'     => 'uxf_pagination_border_radius',
-	'label'       => __( 'Pagination Border Radius', 'flatsome-admin' ),
+	'label'       => __( 'Pagination Border Radius', 'ux-flat' ),
 	'section'     => 'colors',
 	'active_callback' => array(
 		array(
@@ -463,55 +330,4 @@ Flatsome_Option::add_field( 'option',  array(
 		'max'  => 100,
 		'step' => 1
 	),
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'     => 'checkbox',
-	'settings' => 'uxf_box_image',
-	'label'    => __( 'Shadow & Border Image on Single Post', 'flatsome-admin' ),
-	'section'  => 'colors',
-	'default'  => 0,
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'     => 'checkbox',
-	'settings' => 'uxf_tooltips',
-	'label'    => __( 'Hidden Tooltips', 'flatsome-admin' ),
-	'section'  => 'colors',
-	'default'  => 0,
-));
-
-Flatsome_Option::add_field( 'option',  array(
-	'type'        => 'slider',
-	'settings'     => 'uxf_tooltips_size',
-	'label'       => __( 'Tooltip Size', 'flatsome-admin' ),
-	'section'     => 'colors',
-	'default'     => 14,
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_tooltips',
-			'operator' => '===',
-			'value'    => false,
-		),
-	),
-	'choices'     => array(
-		'min'  => 8,
-		'max'  => 14,
-		'step' => 1
-	),
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'      => 'color',
-	'settings'  => 'uxf_tooltips_color',
-	'label'     => __( 'Tooltip Color', 'flatsome-admin' ),
-    'section'   => 'colors',
-	'active_callback' => array(
-		array(
-			'setting'  => 'uxf_tooltips',
-			'operator' => '===',
-			'value'    => false,
-		),
-	),
-	'default'     => '',
 ));

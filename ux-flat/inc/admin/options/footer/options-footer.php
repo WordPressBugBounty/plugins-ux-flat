@@ -1,109 +1,133 @@
 <?php
-
 Flatsome_Option::add_field( '', array(
-	'type'     => 'custom',
-	'settings' => 'custom_uxffooter',
-	'section'  => 'footer',
-	'default'  => '<div class="options-title-divider">UXF Options</div>',
+    'type'     => 'custom',
+    'settings' => 'footer_uxf',
+    'section'  => 'footer',
+    'default'  => '<div class="options-title-divider" style="background: #00a0d2;">UX Flat</div>',
 ));
 
 Flatsome_Option::add_field( 'option', array(
-	'type'        => 'radio-buttonset',
-	'settings' => 'back_to_top_custom',
-	'label'    => __( 'Back To Top Custom', 'flatsome-admin' ),
+    'type'      => 'checkbox',
+    'settings'  => 'back_to_top_pro',
+    'label'     => 'Progress Indicator',
+    'section'   => 'footer',
+	'active_callback' => array(
+		array(
+			'setting'  => 'back_to_top_shape',
+			'operator' => '==',
+			'value'    => 'circle',
+		),
+	),
+    'default'   => 0,
+) );
+
+Flatsome_Option::add_field( 'option', array(
+	'type'      => 'select',
+	'settings' => 'back_to_top_style',
+	'label'    => __( 'Button Color' ),
+    'tooltip'     => 'Plugin: UX Flat',
 	'section'  => 'footer',
 	'active_callback' => array(
 		array(
 			'setting'  => 'back_to_top',
-			'operator' => '===',
+			'operator' => '==',
 			'value'    => true,
 		),
 	),
 	'default'  => '',
-	'choices'     => array(
-      '' => __( 'Default', 'flatsome-admin' ),
-      'style' => __( 'New Style', 'flatsome-admin' ),
-      'progress' => __( 'Progress Indicator', 'flatsome-admin' ),
-    ),
-));
-
-Flatsome_Option::add_field( 'option', array(
-	'type'      => 'radio-buttonset',
-	'settings' => 'back_to_top_bg',
-	'label'    => __( 'Back To Top Background', 'flatsome-admin' ),
-	'section'  => 'footer',
-	'active_callback' => array(
-		array(
-			'setting'  => 'back_to_top_custom',
-			'operator' => '===',
-			'value'    => 'style',
-		),
-	),
-	'default'  => '',
     'choices'  => array(
-        ''  => __( 'Default', 'flatsome-admin' ),
-        'primary'  => __( 'Primary', 'flatsome-admin' ),
-        'secondary'  => __( 'Secondary', 'flatsome-admin' ),
-        'white'  => __( 'White', 'flatsome-admin' ),
-        'transparent'  => __( 'Transparent', 'flatsome-admin' ),
+        ''  => __( 'Default'),
+        'primary'  => __( 'Primary' ),
+        'secondary'  => __( 'Secondary' ),
+        'white'  => __( 'White' ),
+        'is-link'  => __( 'Transparent' ),
 	),
 ));
 
 Flatsome_Option::add_field( 'option', array(
 	'type'     => 'radio-image',
-	'settings' => 'back_to_top_icon',
-	'label'    => __( 'Back To Top Icon Color', 'flatsome-admin' ),
+	'settings' => 'back_to_top_color',
+	'label'    => __( 'Icon Color' ),
 	'section'  => 'footer',
 	'active_callback' => array(
 		array(
-			'setting'  => 'back_to_top_custom',
-			'operator' => '===',
-			'value'    => 'style',
+			'setting'  => 'back_to_top',
+			'operator' => '==',
+			'value'    => true,
 		),
 	),
-	'default'  => 'dark',
+	'default'  => '',
     'choices'  => array(
-        'dark'  => flatsome_customizer_images_uri() . '/text-light.svg',
-        'light' => flatsome_customizer_images_uri() . '/text-dark.svg',
+        'light'  => get_template_directory_uri() . '/inc/admin/customizer/img/text-light.svg',
+        '' => get_template_directory_uri() . '/inc/admin/customizer/img/text-dark.svg',
 	),
 ));
 
 Flatsome_Option::add_field( 'option', array(
 	'type'        => 'radio-buttonset',
 	'settings' => 'back_to_top_size',
-	'label'    => __( 'Back To Top Size', 'flatsome-admin' ),
+	'label'    => __( 'Size' ),
 	'section'  => 'footer',
 	'active_callback' => array(
 		array(
-			'setting'  => 'back_to_top_custom',
-			'operator' => '===',
-			'value'    => 'style',
+			'setting'  => 'back_to_top',
+			'operator' => '==',
+			'value'    => true,
 		),
 	),
 	'default'  => '',
 	'choices'     => array(
-      'is-xsmall' => __( 'XS', 'flatsome-admin' ),
-      'is-small' => __( 'S', 'flatsome-admin' ),
-      '' => __( 'Default', 'flatsome-admin' ),
-      'is-medium' => __( 'M', 'flatsome-admin' ),
-      'is-large' => __( 'L', 'flatsome-admin' ),
-      'is-xlarge' => __( 'XL', 'flatsome-admin' ),
+      'is-xsmall' => 'XS',
+      'is-small' => 'S',
+      '' => __( 'Default' ),
+      'is-medium' => 'M',
+      'is-large' => 'L',
+      'is-xlarge' => 'XL',
     ),
 ));
 
-Flatsome_Option::add_field( 'option',
-	array(
+Flatsome_Option::add_field( 'option', array(
+	'type'        => 'text',
+	'settings' => 'back_to_top_icon',
+	'label'    => __( 'Change Icon HTML' ),
+    'tooltip'     => 'E.g: i or svg',
+	'section'  => 'footer',
+	'active_callback' => array(
+		array(
+			'setting'  => 'back_to_top',
+			'operator' => '==',
+			'value'    => true,
+		),
+	),
+	'default'  => '',
+));
+
+Flatsome_Option::add_field( 'option', array(
 		'type'      => 'text',
 		'settings'  => 'back_to_top_bottom',
 		'default'   => '',
-		'label'     => __( 'Back To Top Bottom', 'flatsome-admin' ),
+		'label'     => __( 'Bottom' ),
+        'tooltip'     => 'E.g: 20px or 20%',
 		'section'   => 'footer',
         'active_callback' => array(
             array(
                 'setting'  => 'back_to_top',
-                'operator' => '===',
+                'operator' => '==',
                 'value'    => true,
             ),
         ),
-	)
+	),
 );
+
+if (UXFPro()) {
+    Flatsome_Option::add_field( 'option',  array(
+        'type'        => 'code',
+        'settings'    => 'cache_footer',
+        'label'       => __( 'Cache Footer', 'ux-flat' ),
+        'description'  => __( 'Add Any HTML', 'ux-flat' ),
+		'choices'     => [
+			'language' => 'html',
+		],
+        'section'     => 'footer',
+    ));
+}

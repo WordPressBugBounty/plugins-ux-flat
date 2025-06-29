@@ -16,12 +16,12 @@ if (!class_exists('UXF_TAX_IMG')) {
             wp_nonce_field('save_cat_image', 'category_image_nonce');
             ?>
             <div class="form-field term-group">
-                <label for="_thumbnail_id"><?php esc_html_e('Featured Images', 'text-domain'); ?></label>
+                <label for="_thumbnail_id"><?php esc_html_e('Thumbnail'); ?></label>
                 <input type="hidden" id="_thumbnail_id" name="_thumbnail_id" class="custom_media_url" value="">
                 <div id="category-image-wrapper"></div>
                 <p>
-                    <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php esc_attr_e('Choose Image', 'text-domain'); ?>" />
-                    <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php esc_attr_e('Remove Image', 'text-domain'); ?>" />
+                    <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php esc_html_e('Upload'); ?>" />
+                    <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php esc_html_e('Remove'); ?>" />
                 </p>
             </div>
             <?php
@@ -42,23 +42,23 @@ if (!class_exists('UXF_TAX_IMG')) {
         public function update_category_image($term) {
             if (is_a($term, 'WP_Term')) {
                 $image_id = get_term_meta($term->term_id, '_thumbnail_id', true);
-                $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
+                $image_url = wp_get_original_image_url($image_id);
                 ?>
                 <tr class="form-field term-group-wrap">
                     <th scope="row">
-                        <label for="_thumbnail_id"><?php esc_html_e('Featured Images', 'text-domain'); ?></label>
+                        <label for="_thumbnail_id"><?php esc_html_e('Thumbnail'); ?></label>
                     </th>
                     <td>
                         <input type="hidden" name="category_image_nonce" value="<?php echo esc_attr(wp_create_nonce('save_cat_image')); ?>">
                         <input type="hidden" id="_thumbnail_id" name="_thumbnail_id" value="<?php echo esc_attr($image_id); ?>">
                         <div id="category-image-wrapper">
                             <?php if ($image_url) { ?>
-                                <img src="<?php echo esc_url($image_url); ?>" alt="" style="max-height: 100px; float: none;">
+                                <img src="<?php echo esc_url($image_url); ?>" alt="" style="max-width:540px; float: none;">
                             <?php } ?>
                         </div>
                         <p>
-                            <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php esc_attr_e('Choose Image', 'text-domain'); ?>" />
-                            <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php esc_attr_e('Remove Image', 'text-domain'); ?>" />
+                            <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php esc_html_e('Upload'); ?>" />
+                            <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php esc_html_e('Remove'); ?>" />
                         </p>
                     </td>
                 </tr>
@@ -96,7 +96,7 @@ if (!class_exists('UXF_TAX_IMG')) {
                             wp.media.editor.send.attachment = function(props, attachment) {
                                 if (_custom_media) {
                                     $('#_thumbnail_id').val(attachment.id);
-                                    $('#category-image-wrapper').html('<img class="custom_media_image" src="' + attachment.url + '" style="margin:0;padding:0;max-height:100px;float:none;" />');
+                                    $('#category-image-wrapper').html('<img class="custom_media_image" src="' + attachment.url + '" style="max-width:540px;margin:0;padding:0;float:none;" />');
                                 } else {
                                     return _orig_send_attachment.apply(button, [props, attachment]);
                                 }
@@ -118,8 +118,13 @@ if (!class_exists('UXF_TAX_IMG')) {
             <?php
         }
 
-        public function load_wp_media_files() {
-            wp_enqueue_media();
+        public function load_wp_media_files($hook) {
+            if ('edit-tags.php' === $hook || 'term.php' === $hook) {
+                $screen = get_current_screen();
+                if (isset($screen->taxonomy) && 'category' === $screen->taxonomy) {
+                    wp_enqueue_media();
+                }
+            }
         }
     }
     $UXF_TAX_IMG = new UXF_TAX_IMG();

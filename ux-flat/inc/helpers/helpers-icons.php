@@ -1,96 +1,81 @@
 <?php
-
 /**
- * Get theme icon by classname.
- *
- * @param string $name The icon name.
- * @param string $size Optional size corresponding to font size.
- * @param array  $atts Optional element attributes.
- *
- * @return string Icon markup.
+ * Icon Zalo
  */
+add_action( 'init', function () {
+    if ( function_exists( 'flatsome_register_follow_link' ) ) {
+        flatsome_register_follow_link( 'zalo', 'Zalo', array(
+            'icon'     => '<i class="icon-zalo"></i>',
+            'priority' => 5,
+        ) );
+    }
+} );
 
-function flatsome_remove_icons_css() {
+function flatsome_remove_icons() {
     remove_action( 'wp_enqueue_scripts', 'flatsome_add_icons_css', 150 );
 }
-add_action( 'after_setup_theme', 'flatsome_remove_icons_css' );
+add_action( 'after_setup_theme', 'flatsome_remove_icons' );
 
-function flatsome_custom_icons_css() {
-    ob_start(); ?>
-<style id="uxf-icon-css" type="text/css">
-@font-face {
-font-family: "fl-icons";
-font-display: block;
-src: url(<?php echo esc_url(UXF_URL . 'assets/css/icons/fl-icons.eot'); ?>);
-src:
-    url(<?php echo esc_url(UXF_URL . 'assets/css/icons/fl-icons.eot#iefix'); ?>) format("embedded-opentype"),
-    url(<?php echo esc_url(UXF_URL . 'assets/css/icons/fl-icons.woff2'); ?>) format("woff2"),
-    url(<?php echo esc_url(UXF_URL . 'assets/css/icons/fl-icons.ttf'); ?>) format("truetype"),
-    url(<?php echo esc_url(UXF_URL . 'assets/css/icons/fl-icons.woff'); ?>) format("woff"),
-    url(<?php echo esc_url(UXF_URL . 'assets/css/icons/fl-icons.svg#fl-icons'); ?>) format("svg");
+function flatsome_custom_icons() {
+    
+    if (get_theme_mod('font_awesome_cdn', 0) || get_theme_mod('uxf_fl_icons') == 2) {
+        wp_enqueue_style('font-awesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css', [], null, 'all');
+    }
+    
+    if (get_theme_mod('uxf_fl_icons') == 1) {
+        wp_add_inline_style(
+            'flatsome-main',
+            '@font-face {
+                font-family: "fl-icons";
+                font-display: block;
+                src: url(' . UXF_URL . 'assets/css/icons/fl-icons.eot);
+                src:
+                    url(' . UXF_URL . 'assets/css/icons/fl-icons.eot#iefix) format("embedded-opentype"),
+                    url(' . UXF_URL . 'assets/css/icons/fl-icons.woff2) format("woff2"),
+                    url(' . UXF_URL . 'assets/css/icons/fl-icons.ttf) format("truetype"),
+                    url(' . UXF_URL . 'assets/css/icons/fl-icons.woff) format("woff"),
+                    url(' . UXF_URL . 'assets/css/icons/fl-icons.svg#fl-icons) format("svg");
+            }'
+        );
+        wp_enqueue_style('flatsome-icons', UXF_URL . 'assets/css/icons.min.css', [], null, 'all');
+    } elseif (get_theme_mod('uxf_fl_icons') == 2) {
+        wp_enqueue_style('flatsome-icons', UXF_URL . 'assets/css/fas.min.css', [], null, 'all');
+    }
 }
-.icon-heart:before { content: '\e800'!important; }
-.icon-twitter:before { content: '\e801'!important; }
-.icon-facebook:before { content: '\e802'!important; }
-.icon-envelop:before { content: '\e803'!important; }
-.icon-tag:before { content: '\e804'!important; }
-.icon-star:before { content: '\e805'!important; }
-.icon-star-o:before { content: '\e806'!important; }
-.icon-feed:before { content: '\e807'!important; }
-.icon-map-pin-fill:before { content: '\e808'!important; }
-.icon-checkmark:before { content: '\e809'!important; }
-.icon-plus:before { content: '\e80a'!important; }
-.icon-instagram:before { content: '\e80b'!important; }
-.icon-pinterest:before { content: '\e80c'!important; }
-.icon-skype:before { content: '\e80d'!important; }
-.icon-search:before { content: '\e80e'!important; }
-.icon-dribbble:before { content: '\e80f'!important; }
-.icon-discord:before { content: '\e810'!important; }
-.icon-expand:before { content: '\e811'!important; }
-.icon-linkedin:before { content: '\e812'!important; }
-.icon-pen-alt-fill:before { content: '\e813'!important; }
-.icon-youtube:before { content: '\e814'!important; }
-.icon-flickr:before { content: '\e815'!important; }
-.icon-clock:before { content: '\e816'!important; }
-.icon-phone:before { content: '\e817'!important; }
-.icon-px:before { content: '\e818'!important; }
-.icon-vk:before { content: '\e819'!important; }
-.icon-tumblr:before { content: '\e81a'!important; }
-.icon-gift:before { content: '\e81b'!important; }
-.icon-play:before { content: '\e81c'!important; }
-.icon-menu:before { content: '\e81d'!important; }
-.icon-messenger:before { content: '\e83a'!important; }
-.icon-zalo:before { content: '\e83b'!important; }
-.icon-user-o:before { content: '\e900'!important; }
-.icon-user:before { content: '\e901'!important; }
-.icon-snapchat:before { content: '\e902'!important; }
-.icon-chat:before { content: '\e903'!important; }
-.icon-lock:before { content: '\e904'!important; }
-.icon-google-plus:before { content: '\e905'!important; }
-.icon-heart-o:before { content: '\e906'!important; }
-.icon-whatsapp:before { content: '\e907'!important; }
-.icon-shopping-cart:before { content: '\e908'!important; }
-.icon-shopping-basket:before { content: '\e909'!important; }
-.icon-shopping-bag:before { content: '\e90a'!important; }
-.icon-tiktok:before { content: '\e90b'!important; }
-.icon-twitch:before { content: '\e90c'!important; }
-.icon-x:before { content: '\e90d'!important; }
-.icon-threads:before { content: '\e90e'!important; }
-.icon-equalizer:before { content: '\e992'!important; }
-.icon-cross:before { content: '\ea0f'!important; }
-.icon-telegram:before { content: '\ea95'!important; }
-.icon-certificate:before { content: '\f0a3'!important; }
-.icon-angle-left:before { content: '\f104'!important; }
-.icon-angle-right:before { content: '\f105'!important; }
-.icon-angle-up:before { content: '\f106'!important; }
-.icon-angle-down:before { content: '\f107'!important; }
-.icon-eye:before { content: '\f108'!important; }
-.icon-eye-blocked:before { content: '\f109'!important; }
-.star-rating:before, .woocommerce-page .star-rating:before { content: '\e806\e806\e806\e806\e806'!important; }
-.star-rating span:before { content: '\e805\e805\e805\e805\e805'!important; }
-</style><?php
-    $buffer = ob_get_clean();
-    echo flatsome_minify_css($buffer); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-}
-add_action( 'wp_enqueue_scripts', 'flatsome_custom_icons_css', 150 );
+add_action('wp_enqueue_scripts', 'flatsome_custom_icons', 150);
 
+//Change Icons follow & share
+if (get_theme_mod('uxf_fl_icons') == 2) {
+    function custom_icons($links, $args) {
+        $icons = [
+            'facebook'   => '<i class="fa-brands fa-facebook-f"></i>',
+            'instagram'  => '<i class="fa-brands fa-instagram"></i>',
+            'tiktok'     => '<i class="fa-brands fa-tiktok"></i>',
+            'snapchat'   => '<i class="fa-brands fa-snapchat"></i>',
+            'x'          => '<i class="fa-brands fa-x-twitter"></i>',
+            'twitter'    => '<i class="fa-brands fa-twitter"></i>',
+            'threads'    => '<i class="fa-brands fa-threads"></i>',
+            'email'      => '<i class="fa-regular fa-envelope"></i>', 
+            'phone'      => '<i class="fa-solid fa-phone"></i>',
+            'pinterest'  => '<i class="fa-brands fa-pinterest-p"></i>',
+            'rss'        => '<i class="fa-solid fa-rss"></i>',
+            'linkedin'   => '<i class="fa-brands fa-linkedin-in"></i>',
+            'youtube'    => '<i class="fa-brands fa-youtube"></i>',
+            'flickr'     => '<i class="fa-brands fa-flickr"></i>',
+            'px500'      => '<i class="fa-brands fa-500px"></i>',
+            'vkontakte'  => '<i class="fa-brands fa-vk"></i>',
+            'telegram'   => '<i class="fa-brands fa-telegram"></i>',
+            'twitch'     => '<i class="fa-brands fa-twitch"></i>',
+            'discord'    => '<i class="fa-brands fa-discord"></i>',
+            'reddit'     => '<i class="fa-brands fa-reddit-alien"></i>',
+        ];
+        foreach ($icons as $key => $icon) {
+            if (isset($links[$key])) {
+                $links[$key]['icon'] = $icon;
+            }
+        }
+        return $links;
+    }
+    add_filter( 'flatsome_follow_links', 'custom_icons', 10, 2 );
+    add_filter( 'flatsome_share_links', 'custom_icons', 10, 2 );
+}

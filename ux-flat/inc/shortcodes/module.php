@@ -25,7 +25,6 @@ function ux_module( $atts, $content = null ) {
 		'height__sm' => '',
 		'height__md' => '',
 		'text_align' => 'center',
-		'animate' => '',
 		'padding' => '',
 		'padding__sm' => '',
 		'padding__md' => '',
@@ -42,6 +41,8 @@ function ux_module( $atts, $content = null ) {
 		// Text depth
 		'text_depth' => '',
 		'onclick' => '',
+		'close' => '',
+		'touch' => '',
 	
 	  ), $atts );
 	
@@ -57,7 +58,7 @@ function ux_module( $atts, $content = null ) {
     if($class) $classes[] = $class;
     if($visibility) $classes[] = $visibility;
 
-    $classes_inner = array();
+    $classes_inner = array( 'text-box-content', 'text' );
 
     if($depth) $classes_inner[] = 'box-shadow-'.$depth;
     if($text_color == 'light') {$classes_inner[] = 'dark';}
@@ -68,16 +69,19 @@ function ux_module( $atts, $content = null ) {
     /* Responive text */
     if($res_text) $classes[] = 'res-text';
     if($opacity) $classes[] = 'hover-fade-in';
-    
+    if($touch) $classes[] = 'small-nav-touch no-scrollbar';
 
     $classes_text =  implode(" ", $classes_text);
     $classes_inner =  implode(" ", $classes_inner);
     $classes =  implode(" ", $classes);
     ?>
-    <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($classes); ?>" <?php if($animate) echo 'data-animate="'.esc_attr($animate).'"'; ?> <?php if($onclick) echo 'onclick="'.esc_attr($onclick).'"'; ?>>
-        <div class="text-box-content text <?php echo esc_attr($classes_inner); ?>">
+    <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($classes); ?>" <?php if($onclick) echo 'onclick="'.esc_attr($onclick).'"'; ?>>
+        <div class="<?php echo esc_attr($classes_inner); ?>">
             <div class="<?php echo esc_attr($classes_text); ?>">
                 <?php echo do_shortcode($content); ?>
+                <?php if($close) { ?>
+                <button type="button" class="position absolute right bottom mb-0 <?php echo esc_attr($id); ?>">✕</button>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -93,12 +97,19 @@ function ux_module( $atts, $content = null ) {
             'bg' => array('selector' => '.text-box-content', 'property' => 'background-color'),
             'padding' => array('selector' => '.text-inner', 'property' => 'padding'),
             'radius' => array('selector' => '.text-box-content', 'property' => 'border-radius', 'unit' => 'px'),
-            'width' => array('selector' => '', 'property' => 'width', 'unit' => '%'),
-            'height' => array('selector' => '', 'property' => 'height', 'unit' => '%'),
+            'width' => array('selector' => '', 'property' => 'width'),
+            'height' => array('selector' => '', 'property' => 'height'),
             'rotate' => array('selector' => '.text-box-content', 'property' => 'rotate', 'unit' => 'deg'),
         );
         echo ux_builder_element_style_tag($id, $args, $atts); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     ?>
+    <?php if($close) { ?>
+    <script>
+        document.querySelector('.<?php echo esc_attr($id); ?>').addEventListener('click', function() {
+            document.getElementById('<?php echo esc_attr($id); ?>').style.display = 'none';
+        });
+    </script>
+    <?php } ?>
     <?php
 	$content = ob_get_contents();
 	ob_end_clean();

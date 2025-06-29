@@ -4,7 +4,7 @@ add_ux_builder_shortcode( 'lightbox', array(
     'type' => 'container',
     'name' => __( 'Lightbox' ),
     'category' => __( 'UX Flat' ),
-	'template'  => flatsome_uxf_builder_template( 'lightbox.html' ),
+	'template'  => uxf_builder_template( 'lightbox.html' ),
     'thumbnail' =>  flatsome_uxf_builder_thumbnail( 'lightbox' ),
 	'wrap'  => false,
     'info' => '{{ label }}',

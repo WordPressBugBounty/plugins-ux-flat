@@ -23,9 +23,6 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
 		'slider_nav_color' => '',
 		'slider_bullets' => 'false',
 	 	'slider_arrows' => 'true',
-        'slide_style' => 'normal',
-        'slide_width' => '',
-        'slide_align' => 'center',
 		'auto_slide' => 'false',
 		'infinitive' => 'true',
 		'depth' => '',
@@ -89,11 +86,12 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
         
         //UX Flat
 		'metakey' => '',
-		'not_ids' => false,
+		'not_ids' => '',
 		'author' => '',
+		'show' => '',
 		'show_author' => 'false',
 		'show_avatar' => '',
-        'title_tag' => 'h3',
+        'tag_name' => 'h3',
 	    'image_direction' => '',
 	  	'col_padding' => '',
 		'col_bg' => '',
@@ -132,7 +130,7 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
 	  if(!$text_pos) $text_pos = 'center';
 	  $columns = 0;
 	  $current_grid = 0;
-	  $grid = uxf_get_posts($grid);
+	  $grid = flatsome_get_grid($grid);
 	  $grid_total = count($grid);
 	}
 
@@ -203,10 +201,6 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
       	array( 'attribute' => 'padding', 'value' => $col_padding ),
   	);
 
-	$css_slider = array(
-      	array( 'attribute' => 'max-width', 'value' => $slide_width ),
-  	);
-
 	$classes_text = implode(' ', $classes_text);
 	$classes_text_only = implode(' ', $classes_text_only);
 	$classes_image = implode(' ', $classes_image);
@@ -226,9 +220,6 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
 	$repeater['slider_nav_color'] = $slider_nav_color;
 	$repeater['slider_bullets'] = $slider_bullets;
     $repeater['auto_slide'] = $auto_slide;
-    $repeater['slide_style'] = $slide_style;
-    $repeater['slide_width'] = $slide_width;
-    $repeater['slide_align'] = $slide_align;
 	$repeater['infinitive'] = $infinitive;
 	$repeater['row_spacing'] = $col_spacing;
 	$repeater['row_width'] = $width;
@@ -239,20 +230,51 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
 	$repeater['columns__sm'] = $columns__sm;
 	$repeater['depth'] = $depth;
 	$repeater['depth_hover'] = $depth_hover;
+
+	if ( ! empty( $offset ) ) {
+		$found_posts_filter_callback = function ( $found_posts, $query ) use ( $offset ) {
+			return $found_posts - (int) $offset;
+		};
+
+		add_filter( 'found_posts', $found_posts_filter_callback, 1, 2 );
+	}
+
+	$offset = (int) $page_number > 1
+		? (int) $offset + ( (int) $page_number - 1 ) * (int) $posts
+		: $offset;
     
 	$args = array(
 		'post_status' => 'publish',
 		'post_type' => 'post',
 		'offset' => $offset,
 		'cat' => $cat,
-		'author' => $author,
 		'tag__in' => $tags ? array_filter( array_map( 'trim', explode( ',', $tags ) ) ) : '',
 		'posts_per_page' => $posts,
+		'paged' => $page_number,
 		'ignore_sticky_posts' => true,
 		'orderby'             => $orderby,
 		'order'               => $order,
-		'post__not_in' => $not_ids ? array_filter( array_map( 'trim', explode( ',', $not_ids ) ) ) : '',
 	);
+    
+    if ( $author ) {
+		$args['author'] = $author;
+    }
+    
+    if ( $not_ids ) {
+		$args['post__not_in'] = array_filter( array_map( 'trim', explode( ',', $not_ids ) ) );
+    }
+
+	// Added for Flatsome v2 fallback
+	if ( get_theme_mod('flatsome_fallback', 0) && $category ) {
+		$args['category_name'] = $category;
+	}
+
+	// Sticky Post
+	if ( $show == 'featured' ) {
+		$args['post__in'] = get_option( 'sticky_posts' );
+	} elseif ( $show == 'notfeatured' ) {
+		$args['post__not_in'] = get_option( 'sticky_posts' );
+    }
     
     if ($metakey && $orderby == "meta_value_num") {
         $args['meta_key'] = $metakey;
@@ -270,11 +292,6 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
             ),
         );
     }
-
-	// Added for Flatsome v2 fallback
-	if ( get_theme_mod('flatsome_fallback', 0) && $category ) {
-		$args['category_name'] = $category;
-	}
 
 	// If custom ids
 	if ( !empty( $ids ) ) {
@@ -305,10 +322,10 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
     $recentPosts = new WP_Query( $args );
     Flatsome_Relay::render_container_open( $recentPosts, $tag, $defined_atts, $atts );
     if ( $type == 'grid' ) {
-        uxf_get_posts_height( $grid_height, $_id );
+        flatsome_get_grid_height( $grid_height, $_id );
     }
 
-    get_uxf_repeater_start($repeater);
+    get_flatsome_repeater_start($repeater);
     $counter = 0;
     while ( $recentPosts->have_posts() ) : $recentPosts->the_post();
     $counter++;
@@ -316,7 +333,6 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
     $col_class    = array( 'post-item' );
     $show_excerpt = $excerpt;
 
-    if($slide_style == 'normal' || $slide_style == '') $col_class[] = 'col';
     if(get_post_format() == 'video') $col_class[] = 'has-post-icon';
 
     if($type == 'grid'){
@@ -337,7 +353,7 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
     
 }
 
-?><div class="<?php echo esc_attr(implode(' ', $col_class)); ?>" <?php if($animate) echo 'data-animate="'.esc_attr($animate).'"';?> <?php echo get_shortcode_inline_css($css_slider); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+?><div class="col <?php echo esc_attr(implode(' ', $col_class)); ?>" <?php if($animate) echo 'data-animate="'.esc_attr($animate).'"';?>>
     <div class="col-inner" <?php echo get_shortcode_inline_css($css_args_col); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
         <div class="box <?php echo esc_attr($classes_box); ?> box-blog-post has-hover">
         <?php if(has_post_thumbnail() && $image_width !== "0") { ?>
@@ -422,9 +438,9 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
                         ?>
                     </div>
                 <?php } ?>
-                <<?php echo esc_attr($title_tag); ?> class="post-title is-<?php echo esc_attr($title_size); ?> <?php echo esc_attr($title_style);?>">
+                <<?php echo esc_attr($tag_name); ?> class="post-title is-<?php echo esc_attr($title_size); ?> <?php echo esc_attr($title_style);?>">
                     <a href="<?php the_permalink() ?>" class="plain"><?php the_title(); ?></a>
-                </<?php echo esc_attr($title_tag); ?>>
+                </<?php echo esc_attr($tag_name); ?>>
                 <?php if($show_author == 'text') { ?>
                     <div class="inline-block author-box" style="border-radius:99px;">
                         <div class="flex-row align-center">
@@ -480,7 +496,7 @@ function shortcode_latest_from_uxf_blog($atts, $content = null, $tag = '' ) {
 
                 <?php if($readmore) { ?>
                     <a href="<?php the_permalink(); ?>" class="button <?php echo esc_attr($readmore_color); ?> is-<?php echo esc_attr($readmore_style); ?> is-<?php echo esc_attr($readmore_size); ?> mb-0">
-                        <?php echo esc_attr($readmore) ;?>
+                        <?php echo $readmore ;?>
                     </a>
                 <?php } ?>
                 <?php do_action('flatsome_blog_post_after'); ?>

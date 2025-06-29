@@ -15,7 +15,7 @@ return array(
           'heading' => 'Size',
           'default' => 'large',
           'conditions' => 'bg',
-          'options' => flatsome_uxf_builder_image_sizes(),
+          'options' => flatsome_ux_builder_image_sizes(),
         ),
         'bg_color' => array(
           'type' => 'colorpicker',
@@ -54,6 +54,11 @@ return array(
             'bottom'   => array( 'title' => 'Bottom'),
             ),
           ),
+        'bg_css'         => array(
+            'heading' => 'Bg Css',
+            'type'       => 'textfield',
+            'full_width' => true,
+        ),
         'bg_pos' => array(
           'conditions' => 'bg',
           'type' => 'textfield',
@@ -90,16 +95,6 @@ return array(
             'max' => 100,
             'step' => 1,
         ),
-        'bg_overflow' => array(
-            'type' => 'radio-buttons',
-            'heading' => 'Bg Overflow',
-            'default' => '',
-            'options' => array(
-                ''  => array( 'title' => 'Visible'),
-                'hidden'  => array( 'title' => 'Hidden'),
-            ),
-            'conditions' => 'bg_radius',
-        ),
         'hover' => array(
           'type' => 'select',
           'heading' => 'Hover',
@@ -110,21 +105,6 @@ return array(
           'heading' => 'Hover Alt',
           'options' => require( get_template_directory() . '/inc/builder/shortcodes/values/image-hover.php' ),
         ),
-        'bg_hover' => array(
-          'conditions' => 'bg',
-          'type' => 'select',
-          'heading' => 'Bg Hover',
-          'default' => '',
-          'options' => array(
-              '' => 'Off',
-              'fade' => 'Fade',
-              'rotatey' => 'Rotate Y',
-              'scalein' => 'Scale In',
-              'scaleout' => 'Scale Out',
-              'translatex' => 'Translate X',
-              'circle' => 'Circle',
-            ),
-          ),
         'parallax' => array(
             'conditions' => 'bg',
             'type' => 'slider',

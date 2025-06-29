@@ -24,9 +24,9 @@ $options =  array(
 ),
 'layout_options' => require( get_template_directory() . '/inc/builder/shortcodes/commons/repeater-options.php' ),
 'relay_options' => require( get_template_directory() . '/inc/builder/shortcodes/commons/relay.php' ),
-'layout_options_slider' => require( UXF_PATH . '/inc/builder/shortcodes/commons/repeater-slider.php' ),
-'post_options' => require( UXF_PATH . '/inc/builder/shortcodes/commons/repeater-posts.php' ),
-'banner_options' => require( UXF_PATH . '/inc/builder/shortcodes/commons/box-banner.php' ),
+'layout_options_slider' => require( UXF_DIR . '/inc/builder/shortcodes/commons/repeater-slider.php' ),
+'post_options' => require( UXF_DIR . '/inc/builder/shortcodes/commons/repeater-posts.php' ),
+'banner_options' => require( UXF_DIR . '/inc/builder/shortcodes/commons/box-banner.php' ),
 'post_title_options' => array(
     'type' => 'group',
     'heading' => __( 'Title' ),
@@ -37,20 +37,16 @@ $options =  array(
                 'default' => '',
                 'options' => require( get_template_directory() . '/inc/builder/shortcodes/values/sizes.php' )
             ),
-            'title_tag' => array(
+            'tag_name' => array(
                 'type'    => 'select',
-                'heading' => __('Title Tag'),
+                'heading' => 'Tag',
                 'default' => 'h3',
                 'options' => array(
                     'h1' => 'H1',
                     'h2' => 'H2',
                     'h3' => 'H3',
                     'h4' => 'H4',
-                    'h5' => 'H5',
-                    'h6' => 'H6',
                     'p' => 'P',
-                    'span' => 'Span',
-                    'div' => 'Div',
                 ),
             ),
             'title_style' => array(
@@ -256,7 +252,7 @@ $options =  array(
 ),
 ),
 );
-$box_styles = require( UXF_PATH . '/inc/builder/shortcodes/commons/box-styles.php' );
+$box_styles = require( UXF_DIR . '/inc/builder/shortcodes/commons/box-styles.php' );
 $options = array_merge($options, $box_styles);
 
 

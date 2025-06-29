@@ -16,12 +16,12 @@ $options = array(
             'type' => 'select',
             'heading' => __( 'Style' ),
             'default' => 'badge',
-            'options' => require( UXF_PATH . '/inc/builder/shortcodes/values/box-layouts.php' )
+            'options' => require( UXF_DIR . '/inc/builder/shortcodes/values/box-layouts.php' )
         )
     ),
 ),
 'layout_options' => require( get_template_directory() . '/inc/builder/shortcodes/commons/repeater-options.php' ),
-'layout_options_slider' => require( UXF_PATH . '/inc/builder/shortcodes/commons/repeater-slider.php' ),
+'layout_options_slider' => require( UXF_DIR . '/inc/builder/shortcodes/commons/repeater-slider.php' ),
 'cat_meta' => array(
     'type' => 'group',
     'heading' => __( 'Meta' ),
@@ -107,10 +107,10 @@ $options = array(
 )
 );
 
-$box_styles = require( UXF_PATH . '/inc/builder/shortcodes/commons/box-styles.php' );
+$box_styles = require( UXF_DIR . '/inc/builder/shortcodes/commons/box-styles.php' );
 $options = array_merge($options, $box_styles);
 
-$advanced = array('advanced_options' => require( UXF_PATH . '/inc/builder/shortcodes/commons/advanced.php'));
+$advanced = array('advanced_options' => require( UXF_DIR . '/inc/builder/shortcodes/commons/advanced.php'));
 $options = array_merge($options, $advanced);
 
 

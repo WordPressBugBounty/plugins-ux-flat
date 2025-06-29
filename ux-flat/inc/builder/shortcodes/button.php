@@ -3,18 +3,15 @@
 add_ux_builder_shortcode( 'button', array(
 	'name'      => __( 'Button' ),
 	'category'  => __( 'Content' ),
-	'template'  => flatsome_uxf_builder_template( 'button.html' ),
+	'template'  => uxf_builder_template( 'button.html' ),
     'thumbnail' => get_template_directory_uri() . '/inc/builder/shortcodes/thumbnails/button.svg',
 	'info'      => '{{ text }}',
 	'inline'    => true,
 	'wrap'      => false,
 	'priority'  => 1,
     'styles' => array(
-      'uxf-animate' => UXF_URL . 'assets/css/animate.min.css',
-      'uxf-hover' => UXF_URL . 'assets/css/hover.min.css'
-    ),
-    'scripts' => array(
-      'uxf-anidynamic' => UXF_URL . 'assets/js/animate.min.js',
+      'hovercss' => UXF_URL . 'assets/css/hover.min.css',
+      'ihovercss' => UXF_URL . 'assets/css/ihover.min.css'
     ),
 	'presets'   => array(
 		array(
@@ -77,7 +74,6 @@ add_ux_builder_shortcode( 'button', array(
 			'focus'      => 'true',
 			'value'      => 'Button',
 			'default'    => '',
-			'auto_focus' => true,
 		),
 		'letter_case'      => array(
 			'type'    => 'radio-buttons',
@@ -102,7 +98,7 @@ add_ux_builder_shortcode( 'button', array(
 						'alert'     => 'Alert',
 						'success'   => 'Success',
 						'white'     => 'White',
-						'gradientbtn'     => 'Custom',
+						'custom'     => 'Custom',
 					),
 				),
 				'style'       => array(
@@ -120,7 +116,7 @@ add_ux_builder_shortcode( 'button', array(
 					),
 				),
 				'text_color' => array(
-					'conditions' => 'color == "gradientbtn" && style == ""',
+					'conditions' => 'color == "custom"',
 					'type'     => 'colorpicker',
 					'heading'  => __( 'Text Color', 'flatsome' ),
 					'default' => '',
@@ -128,7 +124,7 @@ add_ux_builder_shortcode( 'button', array(
 					'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
 				),
 				'bg_color' => array(
-					'conditions' => 'color == "gradientbtn" && style == ""',
+					'conditions' => 'color == "custom"',
 					'type'     => 'colorpicker',
 					'heading'  => __( 'BG Color', 'flatsome' ),
 					'default' => '',
@@ -136,15 +132,15 @@ add_ux_builder_shortcode( 'button', array(
 					'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
 				),
                 'bg_gradient' => array(
-                    'conditions' => 'color == "gradientbtn" && style == ""',
-                  'type'     => 'colorpicker',
-                  'heading'  => __( 'BG Gradient', 'flatsome' ),
-                  'default' => '',
-                  'format'   => 'rgb',
-                  'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
+                    'conditions' => 'color == "custom"',
+                    'type'     => 'colorpicker',
+                    'heading'  => __( 'BG Gradient', 'flatsome' ),
+                    'default' => '',
+                    'format'   => 'rgb',
+                    'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
                 ),
                 'bg_gradient_to' => array(
-                  'conditions' => 'color == "gradientbtn" && style == "" && bg_gradient',
+                  'conditions' => 'bg_gradient',
                   'type' => 'radio-buttons',
                   'heading' => 'Gradient To',
                   'full_width' => true,
@@ -156,65 +152,34 @@ add_ux_builder_shortcode( 'button', array(
                     'bottom'   => array( 'title' => 'Bottom'),
                     ),
                   ),
+				'border' => array(
+					'type' => 'scrubfield',
+					'heading' => 'Border',
+					'default' => '',
+					'unit' => 'px',
+					'min' => 0,
+					'max' => 50,
+				),
 				'border_style' => array(
-					'conditions' => 'color == "gradientbtn" && style == ""',
+					'conditions' => 'border',
 					'type' => 'radio-buttons',
 					'heading' => 'Border Style',
 					'full_width' => true,
 					'default' => '',
 					'options' => array(
-						'' => array( 'title' => 'Close', 'icon' => 'dashicons-no-alt', ),
-						'none'   => array( 'title' => 'None'),
+						'' => array( 'title' => 'None', 'icon' => 'dashicons-no-alt', ),
 						'solid'   => array( 'title' => 'Solid'),
 						'dashed'  => array( 'title' => 'Dashed'),
 						'dotted'  => array( 'title' => 'Dotted'),
 					),
 				),
-				'border_width' => array(
-					'conditions' => 'color == "gradientbtn" && border_style',
-					'type' => 'scrubfield',
-					'heading' => 'Border Width',
-					'unit' => 'px',
-					'min' => 0,
-					'max' => 50,
-				),
 				'border_color' => array(
-					'conditions' => 'color == "gradientbtn" && border_style',
+					'conditions' => 'border',
 					'type'     => 'colorpicker',
 					'heading'  => __( 'Border Color', 'flatsome' ),
 					'default' => '',
 					'format'   => 'rgb',
-					'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
-				),
-				'outline_style' => array(
-					'conditions' => 'color == "gradientbtn" && style == ""',
-					'type' => 'radio-buttons',
-					'heading' => 'Outline Style',
-					'full_width' => true,
-					'default' => '',
-					'options' => array(
-						'' => array( 'title' => 'Close', 'icon' => 'dashicons-no-alt', ),
-						'none'   => array( 'title' => 'None'),
-						'solid'   => array( 'title' => 'Solid'),
-						'dashed'  => array( 'title' => 'Dashed'),
-						'dotted'  => array( 'title' => 'Dotted'),
-					),
-				),
-				'outline_width' => array(
-					'conditions' => 'color == "gradientbtn" && outline_style',
-					'type' => 'scrubfield',
-					'heading' => 'Outline Width',
-					'unit' => 'px',
-					'min' => 0,
-					'max' => 50,
-				),
-				'outline_color' => array(
-					'conditions' => 'color == "gradientbtn" && outline_style',
-					'type'     => 'colorpicker',
-					'heading'  => __( 'Outline Color', 'flatsome' ),
-					'default' => '',
-					'format'   => 'rgb',
-					'helpers'  => require( get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php' ),
+					'helpers'  => require get_template_directory() . '/inc/builder/shortcodes/helpers/colors.php',
 				),
 				'size'        => array(
 					'type'    => 'select',
@@ -237,8 +202,14 @@ add_ux_builder_shortcode( 'button', array(
 					'type'    => 'slider',
 					'heading' => __( 'Letter Spacing', 'flatsome' ),
 					'default' => '',
-					'max'     => '20',
-					'min'     => '0',
+					'max'     => 30,
+					'min'     => 0,
+				),
+				'animate'     => array(
+					'type'    => 'select',
+					'heading' => 'Animate',
+					'default' => 'none',
+					'options' => require get_template_directory() . '/inc/builder/shortcodes/values/animate.php',
 				),
 				'padding'     => array(
 					'type'       => 'margins',
@@ -253,7 +224,7 @@ add_ux_builder_shortcode( 'button', array(
 					'class'   => '',
 					'heading' => 'Radius',
 					'default' => '0',
-					'max'     => '100',
+					'max'     => '99',
 					'min'     => '0',
 				),
 				'depth'       => array(
@@ -277,6 +248,11 @@ add_ux_builder_shortcode( 'button', array(
 					'type'    => 'checkbox',
 					'heading' => 'Expand',
 				),
+                'tooltip'             => array(
+                    'type'       => 'textfield',
+                    'heading'    => 'Tooltip',
+                    'default'    => '',
+                ),
 			),
 		),
 		'icon_options'     => array(
@@ -286,14 +262,18 @@ add_ux_builder_shortcode( 'button', array(
 				'icon'        => array(
 					'type'    => 'select',
 					'heading' => 'Icon',
-					'options' => require( UXF_PATH . '/inc/builder/shortcodes/values/icons.php' ),
+					'options' => require UXF_DIR . '/inc/builder/shortcodes/values/icons.php',
 				),
                 'icon_custom' => array(
 					'conditions' => 'icon == "custom"',
                     'type'       => 'textfield',
                     'heading'    => 'Icon Class',
-                    'default'    => '',
-                    'auto_focus' => true,
+                ),
+                'icon_size' => array(
+                    'type'       => 'scrubfield',
+                    'heading'    => 'Icon Size',
+					'min' => 0,
+					'unit' => 'px',
                 ),
 				'icon_pos'    => array(
 					'conditions' => 'icon',
@@ -313,20 +293,19 @@ add_ux_builder_shortcode( 'button', array(
 						'true' => 'Visible on hover',
 					),
 				),
+                'icon_hover'        => array(
+					'conditions' => 'icon',
+                    'type'    => 'select',
+                    'heading' => 'Icon Hover',
+					'options' => require UXF_DIR . '/inc/builder/shortcodes/values/ihover.php',
+                ),
 			),
 		),
-		// Animate
-		'ani_options' => require( UXF_PATH . '/inc/builder/shortcodes/commons/animate.php' ),
-		'hover_options'     => array(
+		'hover_options' => require UXF_DIR . '/inc/builder/shortcodes/commons/hover.php',
+		'onclick_options'     => array(
 			'type'    => 'group',
-			'heading' => 'UXF Hover & OnClick',
+			'heading' => 'OnClick',
 			'options' => array(
-				'box_hover'     => array(
-					'type'    => 'select',
-					'heading' => 'Hover',
-					'default' => '',
-					'options' => require( UXF_PATH . '/inc/builder/shortcodes/values/hover.php' ),
-				),
                 'onclick'    => array(
                     'type'    => 'textfield',
                     'heading' => 'OnClick',

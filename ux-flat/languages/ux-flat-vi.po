@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: UX Flat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-04 10:03+0000\n"
-"PO-Revision-Date: 2024-07-08 12:31+0000\n"
+"PO-Revision-Date: 2024-11-06 12:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: Tiếng Việt\n"
 "Language: vi\n"
@@ -15,94 +15,287 @@ msgstr ""
 "X-Loco-Version: 2.6.7; wp-6.5\n"
 "X-Domain: ux-flat"
 
-#. %s is minutes
-#: inc/init.php:792
+#: inc/core.php:16
 #, php-format
-msgid "%s minutes"
-msgstr "%s phút"
-
-#: ux-flat.php:30
-#, php-format
+#| msgid ""
+#| "<strong>Warning</strong>: You are using <strong>Flatsome v%1s</strong> "
+#| "which is only compatible with <a href=\"%2s\" target=\"_blank\">UX Flat "
+#| "v5.0</a>"
 msgid ""
-"<strong>Warning</strong>: You are using <strong>Flatsome v%1s</strong> which "
-"is only compatible with <a href=\"%2s\" target=\"_blank\">UX Flat v5.0</a>"
+"<strong>Warning</strong>: You are using <strong>Flatsome v%1$s</strong> "
+"which is only compatible with <a href=\"%2$s\" target=\"_blank\">UX Flat v5."
+"0</a>"
 msgstr ""
 "<strong>Cảnh báo</strong>: Bạn đang sử dụng <strong>Flatsome v%1s</strong> "
 "chỉ tương thích với <a href=\"%2s\" target=\"_blank\">UX Flat v5.0</a>"
 
-#: inc/shortcodes/portfolio.php:149
+#: inc/admin/options/footer/options-footer.php:133
+#: inc/admin/options/header/options-header-content.php:7
+msgid "Add Any HTML"
+msgstr "Thêm HTML"
+
+#: inc/admin/options/blog/options-blog-archive.php:35
+msgid "Add meta description to top"
+msgstr "Thêm thẻ mô tả danh mục vào phía trên"
+
+#: inc/of_options.php:320 inc/of_options.php:345
+msgid "Add shortcode [day] [month] [year] to title"
+msgstr "Thêm shortcode [day] [month] [year] vào tiêu đề"
+
+#: inc/admin/options/blog/options-blog-single.php:193
+msgid "After Blog"
+msgstr "Sau Blog"
+
+#: pro/inc/shortcodes/portfolio.php:160
 msgid "All"
 msgstr "Tất cả"
 
-#: inc/init.php:1136
+#: inc/admin/options/footer/options-footer.php:134
+msgid "All Cache Footer"
+msgstr "Tất cả Cache từ Footer"
+
+#: inc/admin/options/header/options-header-content.php:8
+msgid "All Cache Header"
+msgstr "Tất cả Cache từ Header"
+
+#: inc/admin/options/blog/options-blog-single.php:194
+msgid "Before Comment"
+msgstr "Trước Comment"
+
+#: inc/admin/options/blog/options-blog-single.php:154
+msgid "Blog author box (Convert h5 to p)"
+msgstr "Thông tin tác giả (Chuyển thẻ h5 thành p)"
+
+#: inc/of_options.php:90
+msgid "Blog Categories"
+msgstr "Danh Mục Bài Viết"
+
+#: inc/admin/options/footer/options-footer.php:132
+msgid "Cache Footer"
+msgstr "Nén Cache Footer"
+
+#: inc/admin/options/header/options-header-content.php:6
+msgid "Cache Header"
+msgstr "Nén Cache Header"
+
+#: inc/of_options.php:287
+msgid "Cache Page"
+msgstr "Cache Trang"
+
+#: inc/admin/options/shop/options-shop-category.php:5
+msgid "Change Product Title"
+msgstr "Thay đổi thẻ Tiêu Đề"
+
+#: inc/admin/options/styles/options-type.php:20
+msgid "Custom Icons"
+msgstr "Tuỳ chỉnh Icon"
+
+#: inc/admin/options/blog/options-blog-layout.php:13
+msgid "Custom layout on single category"
+msgstr "Tuỳ biến giao diện từng chuyên mục"
+
+#: inc/admin/options/blog/options-blog-layout.php:12
+msgid "Custom Posts Layout"
+msgstr "Tuỳ biến Giao Diện Bài Viết"
+
+#: pro/inc/helpers/class.font-resizer.php:41
+msgid "Decrease"
+msgstr "Giảm"
+
+#: inc/admin/options/blog/options-blog-single.php:179
+msgid ""
+"Defines a time interval for the document to refresh itself. E.g. 1200 seconds"
+msgstr "Khoảng thời gian tự động tải trang. Ví dụ: 1200 giây."
+
+#: inc/of_options.php:203
+msgid "Disable Builder Edit Post/Product/Portfolio"
+msgstr "Tắt UX Builder tại Bài Viết/Sản Phẩm/Portfolio"
+
+#: inc/of_options.php:168
+msgid "Disable Flatsome issues"
+msgstr "Tắt thông báo Flatsome"
+
+#: inc/core.php:65 inc/of_options.php:26
+msgid "Donate"
+msgstr "Ủng hộ"
+
+#: inc/admin/options/blog/options-blog-single.php:329
+msgid "E.g: [font_resizer text=\"no\"]"
+msgstr "Ví dụ: [font_resizer text=\"no\"]"
+
+#: inc/of_options.php:31
+msgid "Enhance Elements"
+msgstr "Cải tiến Elements"
+
+#: inc/of_options.php:280
+msgid "Export Page"
+msgstr "Xuất Trang"
+
+#: inc/helpers/helpers-export.php:10
 msgid "Export UX"
 msgstr "Xuất tập tin UX"
 
-#: inc/init.php:774
-msgid "Follow us on "
-msgstr "Theo dõi chúng tôi trên "
+#: inc/admin/options/blog/options-blog-featured.php:5
+msgid "Featured Posts Shortcode"
+msgstr "Thêm Shortcode vào Bài Viết Nổi Bật"
 
-#: inc/init.php:774
-msgid "Google News"
+#: pro/inc/helpers/class.font-resizer.php:30
+#: inc/admin/options/blog/options-blog-single.php:328
+msgid "Font Resizer"
+msgstr "Kích thước chữ"
+
+#: inc/admin/options/pages/options-pages.php:6
+msgid ""
+"Hidden H1 & H2 is incorporated into the Homepage / Frontpage for user "
+"experience."
 msgstr ""
+"Ẩn H1 & H2 tại Trang chủ / Trang chính để cải thiện trải nghiệm người dùng."
+
+#: inc/of_options.php:188
+msgid "Hidden Tooltips"
+msgstr "Ẩn Tooltips"
 
 #. Author URI of the plugin
 msgid "https://profiles.wordpress.org/wpvncom/"
 msgstr ""
 
-#. URI of the plugin
-msgid "https://uxflat.com"
-msgstr ""
+#: pro/inc/helpers/class.font-resizer.php:34
+msgid "Increase"
+msgstr "Tăng"
 
-#: inc/init.php:1036
-msgid "Latest Posts"
-msgstr "Những tin mới hơn"
+#: inc/of_options.php:249
+msgid "Lightbox Close Inside"
+msgstr "Chuyển nút close vào bên trong"
 
 #: template-parts/header/page-loader.php:20
 msgid "Loading"
 msgstr "Đang tải"
 
-#: inc/init.php:1049
-msgid "Older Posts"
-msgstr "Những tin cũ hơn"
+#: inc/of_options.php:305 inc/of_options.php:338
+msgid "Manage custom post layout priority."
+msgstr "Quản lý thứ tự ưu tiên của bố cục bài viết tùy chỉnh."
 
-#: inc/init.php:789
+#: inc/admin/options/blog/options-blog-archive.php:27
+msgid "Move description to bottom"
+msgstr "Chuyển mô tả xuống phía dưới"
+
+#: inc/admin/options/header/options-header-search.php:5
+msgid "Multi-line Placeholder"
+msgstr "Nhiều dòng Placeholder"
+
+#: inc/of_options.php:88
+msgid "New Elements"
+msgstr "Elements mới"
+
+#: inc/of_options.php:294
+msgid "New Templates"
+msgstr "Mẫu giao diện mới"
+
+#: inc/init.php:503
+#, fuzzy, php-format
 msgid "One minute"
-msgstr "Một phút"
+msgid_plural "%s minutes"
+msgstr[0] "Một phút"
 
-#: inc/init.php:1023
-msgid "Related Posts by Category"
-msgstr "Cùng chủ đề"
+#: inc/admin/options/blog/options-blog-single.php:178
+msgid "Post Refesh"
+msgstr "Tải lại bài viết"
 
-#: inc/init.php:1014
-msgid "Related Posts by Tags"
-msgstr "Theo dòng sự kiện"
+#: inc/of_options.php:182
+msgid "Quick view the Page"
+msgstr "Xem nhanh Trang"
+
+#: inc/core.php:66
+msgid "Rate UX Flat on WordPress.org"
+msgstr "Đánh giá UX Flat trên WordPress.org"
+
+#: pro/inc/helpers/class.related-posts.php:15
+msgid "Related Posts"
+msgstr "Bài Viết Liên Quan"
+
+#: inc/of_options.php:312
+msgid "Remove the last static crumb on single post (post title)."
+msgstr "Xóa tiêu đề cuối cùng trên bài viết đơn (tiêu đề bài viết)"
+
+#: inc/admin/options/blog/options-blog-single.php:155
+msgid "Required: Disable Blog author box & Next/Prev navigation"
+msgstr "Yêu cầu: Vô hiệu hóa tác giả và điều hướng tiếp theo/trước"
+
+#: inc/admin/options/header/options-header-search.php:6
+msgid "Required: UXF Element Typed"
+msgstr "Yêu cầu bật: UXF Typed"
+
+#: inc/of_options.php:175
+msgid "Search by Title Only"
+msgstr "Chỉ tìm kiếm bằng tiêu đề"
+
+#: inc/admin/options/header/options-header-sticky.php:26
+msgid "Show sticky when scrolling down"
+msgstr "Hiển thị cố định khi cuộn xuống."
 
 #. Description of the plugin
-#| msgid ""
-#| "This plugin will create new elements for Flatsome > v3.18 <code>Flatsome "
-#| "→ Advanced → UXFlat</code>"
-msgid ""
-"This plugin will create new elements for Flatsome > v3.19.2 <code>Flatsome → "
-"Advanced → UXFlat</code>"
-msgstr ""
-"Thêm mới các Element dành riêng cho theme Flatsome > v3.19.2 <code>Flatsome "
-"→ Advanced → UXFlat</code>"
+msgid "This plugin will create new elements for Flatsome."
+msgstr "Thêm mới các Element dành riêng cho theme Flatsome."
 
 #. Author of the plugin
 #| msgid "Tien COP"
 msgid "TienCOP"
 msgstr "Tiến CỌP"
 
+#: inc/admin/options/styles/options-colors.php:299
+msgid "Tooltip Size"
+msgstr "Kích thước Tooltips"
+
+#: inc/admin/options/header/options-header-sticky.php:12
+msgid "Top Bar - Title sticky on Scroll "
+msgstr "Thanh trên - Tiêu đề cố định khi cuộn"
+
+#: inc/of_options.php:208
+msgid "Unregister Block. E.g: yoast-seo woocommerce .One line per value"
+msgstr ""
+"Bỏ đăng ký khối. Ví dụ: yoast-seo, woocommerce. Mỗi giá trị trên một dòng"
+
+#: inc/core.php:47 inc/of_options.php:26
+msgid "Upgrade"
+msgstr "Nâng cấp"
+
+#: inc/of_options.php:264
+msgid "Upload or choose a custom loader image (GIF, SVG)"
+msgstr "Tải lên hoặc chọn thư viện ảnh (GIF, SVG)."
+
+#: inc/of_options.php:327 inc/of_options.php:352
+msgid "Use Canonical URL to Resolve Duplicate Content Issues"
+msgstr "Sử dụng URL chuẩn để giải quyết vấn đề nội dung trùng lặp"
+
+#: inc/admin/options/blog/options-blog-single.php:259
+msgid "Use shortcode by category"
+msgstr "Sử dụng Shortcode theo danh mục"
+
+#: inc/admin/options/blog/options-blog-single.php:306
+msgid "Use shortcode by Custom Field"
+msgstr "Sử dụng shortcode để Custom Field"
+
+#: inc/admin/options/blog/options-blog-single.php:274
+msgid "Use shortcode by latest"
+msgstr "Sử dụng Shortcode theo bài mới"
+
+#: inc/admin/options/blog/options-blog-single.php:289
+msgid "Use shortcode by older"
+msgstr "Sử dụng Shortcode theo bài cũ"
+
+#: inc/admin/options/blog/options-blog-single.php:244
+msgid "Use shortcode by tags"
+msgstr "Sử dụng Shortcode theo bài liên quan"
+
 #. Name of the plugin
-msgid "UX Flat"
+msgid "UX Flat Pro"
 msgstr ""
 
-#: inc/init.php:1096
+#: inc/init.php:860
 msgid "View page"
 msgstr "Xem trang"
 
-#: ux-flat.php:26
+#: inc/core.php:12
 #| msgid ""
 #| "Warning: Please install the \"Flatsome\" parent theme or deactive UX Flat"
 msgid ""

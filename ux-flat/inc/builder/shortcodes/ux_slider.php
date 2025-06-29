@@ -7,7 +7,7 @@ add_ux_builder_shortcode( 'ux_slider', array(
     'message' => __( 'Add slides here' ),
     'directives' => array( 'ux-slider' ),
     'allow' => array( 'ux_banner','ux_image','ux_lottie','section','row','ux_banner_grid','logo'),
-    'template' => flatsome_uxf_builder_template( 'ux_slider.html' ),
+    'template' => uxf_builder_template( 'ux_slider.html' ),
     'thumbnail' => get_template_directory_uri() . '/inc/builder/shortcodes/thumbnails/slider.svg',
     'tools' => 'shortcodes/ux_slider/ux-slider-tools.directive.html',
     'wrap'   => false,

@@ -40,7 +40,7 @@ $options = array(
 	    'heading'    => __( 'Lightbox Image Size' ),
 	    'conditions' => 'lightbox == "true"',
 	    'default'    => 'large',
-	    'options'    => flatsome_uxf_builder_image_sizes(),
+	    'options'    => flatsome_ux_builder_image_sizes(),
     ),
     'tag_name' => array(
         'type'    => 'select',
@@ -91,7 +91,7 @@ $options = array(
 'layout_options_slider' => require( get_template_directory() . '/inc/builder/shortcodes/commons/repeater-slider.php' ),
 );
 
-$box_styles = require( UXF_PATH . '/inc/builder/shortcodes/commons/box-styles.php' );
+$box_styles = require( UXF_DIR . '/inc/builder/shortcodes/commons/box-styles.php' );
 $options = array_merge($options, $box_styles);
 
 add_ux_builder_shortcode( 'ux_gallery', array(

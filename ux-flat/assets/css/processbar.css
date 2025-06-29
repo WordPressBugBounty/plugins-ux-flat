@@ -1,0 +1,40 @@
+.processbar-item {
+    display: flex;
+    margin-bottom: 13px;
+}
+.processbar-percentage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    transition: .3s linear 0s;
+}
+.processbar-number {
+    position: absolute;
+    right: -20px;
+    top: -30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.processbar-value {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.processbar-number:before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    bottom: -4px;
+    transform: rotate(45deg);
+}
+.processbar-percentage{
+    width: 0;
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -ms-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+}

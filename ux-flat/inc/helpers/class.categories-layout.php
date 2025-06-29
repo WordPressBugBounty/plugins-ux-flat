@@ -55,7 +55,7 @@ if (!class_exists('UXF_TAX_LAYOUT')) {
                 if ($category && !is_wp_error($category)) {
                     $layout = get_term_meta($category->term_id, 'layout', true);
                     if ($layout) {
-                        $template = UXF_PATH . 'template-parts/posts/archive-layout.php';
+                        $template = UXF_DIR . 'template-parts/posts/archive-layout.php';
                     }
                 }
             }

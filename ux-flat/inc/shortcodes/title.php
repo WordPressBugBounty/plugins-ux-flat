@@ -2,7 +2,7 @@
 // [title]
 function uxf_title_shortcode( $atts, $content = null ){
   extract( shortcode_atts( array(
-    '_id' => 'title-'.wp_rand(),
+    '_id' => 'title-'.rand(),
     'class' => '',
     'visibility' => '',
     'text' => 'Lorem ipsum dolor sit amet...',
@@ -24,8 +24,6 @@ function uxf_title_shortcode( $atts, $content = null ){
     'ani_repeat'     => '',
     'ani_delay'     => '',
     'ani_duration'     => '',
-    'ani_dynamic'     => '',
-    'ani_text'     => '',
     //Box Hover
     'box_hover' => '',
     //Custom tag b
@@ -47,102 +45,139 @@ function uxf_title_shortcode( $atts, $content = null ){
     'box_radius' => '',
     'padding' => '',
   ), $atts ) );
-
-  $classes = array('container', 'section-title-container');
-  $css_args_tag = array();
-  $css_args_title = array();
-  if ( $class ) $classes[] = $class;
-  if ( $visibility ) $classes[] = $visibility;
   
-  $classes = implode(' ', $classes);
+    if ( ! preg_match( '/^h[1-6]$/', trim( $tag_name ) ) ) $tag_name = 'h3';
 
-  $small_text = '';
-  if($sub_text) $small_text = '<small class="sub-title">'.$atts['sub_text'].'</small>';
-  
-  if($icon) $icon = get_flatsome_icon($icon);
+    $classes = array('container', 'section-title-container');
+    $css_args_tag = array();
+    if ( $class ) $classes[] = $class;
+    if ( $visibility ) $classes[] = $visibility;
 
-  // fix old
-  if($style == 'bold_center') $style = 'bold-center';
+    $classes = implode(' ', $classes);
 
-  if($size !== '100'){
-    $css_args_title[] = array( 'attribute' => 'font-size', 'value' => $size, 'unit' => '%');
-  }
-  if($color){
-    $css_args_title[] = array( 'attribute' => 'color', 'value' => $color);
-  }
-  if($box_color){ 
-    $css_args_title[] = array( 'attribute' => 'background', 'value' => $box_color); 
-  }
-  if($box_margin){ 
-    $css_args_title[] = array( 'attribute' => 'margin', 'value' => $box_margin); 
-  }
-  if($box_padding){ 
-    $css_args_title[] = array( 'attribute' => 'padding', 'value' => $box_padding); 
-  }
-  if($box_radius){ 
-    $css_args_title[] = array( 'attribute' => 'border-radius', 'value' => $box_radius, 'unit' => 'px'); 
-  }
-  if($m_border_width){
-    $css_args_title[] = array( 'attribute' => 'border-bottom-width', 'value' => $m_border_width); 
-  }
-  if($m_border_color){ 
-    $css_args_title[] = array( 'attribute' => 'border-bottom-color', 'value' => $m_border_color); 
-  }
+    $small_text = '';
+    if($sub_text) $small_text = '<small class="sub-title">'.$atts['sub_text'].'</small>';
 
-  $css_args = array(
-    array( 'attribute' => 'overflow', 'value' => 'hidden'),
-    array( 'attribute' => 'background', 'value' => $bg_color),
-    array( 'attribute' => 'margin-top', 'value' => $margin_top),
-    array( 'attribute' => 'margin-bottom', 'value' => $margin_bottom),
-    array( 'attribute' => 'padding', 'value' => $padding),
-  );
+    if($icon) $icon = get_flatsome_icon($icon);
 
-  $link_output = '';
-  $link_all = '';
-  $link_color = '';
-  if($color) $link_color = 'style="color:'.esc_attr($color).'"';
-  
-  if($link && $link_text){
+    // fix old
+    if($style == 'bold_center') $style = 'bold-center';
+
+
+    $css_args = array(
+        array( 'attribute' => 'overflow', 'value' => 'hidden')
+    );
+
+    $link_output = '';
+    $link_all = '';
+    $link_color = '';
+    if($color) $link_color = 'style="color:'.esc_attr($color).'"';
+
+    if($link && $link_text){
         $link_all = $icon.$text.$small_text;
         $link_output = '<a href="'.esc_url($link).'" target="'.esc_attr($target).'" '.$link_color.'>'.$link_text.get_flatsome_icon('icon-angle-right').'</a>';
-  } elseif ($link){
+    } elseif ($link){
         $link_all = '<a href="'.esc_url($link).'" target="'.esc_attr($target).'" '.$link_color.'>'.$icon.$text.$small_text.'</a>';
-  } else {
+    } else {
         $link_all = $icon.$text.$small_text;
-  }
-  
-  if($width) {
-    $css_args[] = array( 'attribute' => 'max-width', 'value' => $width);
-  }
+    }
+    if($bg_transform) {
+        $css_args[] = array( 'attribute' => 'transform', 'value' => 'skewX('.$bg_transform.'deg)');
+    }
+    if(!$text_transform) {
+        $css_args_tag[] = array( 'attribute' => 'transform', 'value' => 'skewX(-'.$bg_transform.'deg)');
+    }
 
-  if($bg_transform) {
-    $css_args[] = array( 'attribute' => 'transform', 'value' => 'skewX('.$bg_transform.'deg)');
-  }
-  
-  $css_args_tag = array(
-    array( 'attribute' => 'border-bottom-width', 'value' => $b_border_width),
-    array( 'attribute' => 'border-bottom-color', 'value' => $b_border_color),
-    array( 'attribute' => 'transform', 'value' => ($text_transform ? '' : 'skewX(-'.$bg_transform.'deg)')),
-  );
-
-  $css_b1 = array(
-    array( 'attribute' => 'height', 'value' => $b_height),
-    array( 'attribute' => 'background-color', 'value' => $b_bg_color),
-    array( 'attribute' => 'opacity', 'value' => $b_opacity),
+    $css_b1 = array(
     array( 'attribute' => 'transform', 'value' => ($b_transform ? 'rotate(-'.$b_transform.'deg)' : '')),
-  );
-  $css_b2 = array(
-    array( 'attribute' => 'height', 'value' => $b_height),
-    array( 'attribute' => 'background-color', 'value' => $b_bg_color),
-    array( 'attribute' => 'opacity', 'value' => $b_opacity),
+    );
+    $css_b2 = array(
     array( 'attribute' => 'transform', 'value' => ($b_transform ? 'rotate(-'.$b_transform.'deg)' : '')),
-  );
-
-  return '<div class="'.esc_attr($classes).'" '.get_shortcode_inline_css($css_args).'>
-          <'. esc_attr($tag_name) . ' class="section-title section-title-'.esc_attr($style).'" '.get_shortcode_inline_css($css_args_tag).'>
-          <b '.get_shortcode_inline_css($css_b1).'></b>
-          <span class="section-title-main" '.get_shortcode_inline_css($css_args_title).'>'.wp_kses_post($link_all).'</span>
-          <b '.get_shortcode_inline_css($css_b2).'></b>'.wp_kses_post($link_output).'</' . esc_attr($tag_name) .'>
-          </div>';
+    );
+    // Get custom CSS
+    $args = array(
+        'bg_color' => array(
+            'selector' => '.section-title',
+            'property' => 'background',
+        ),
+        'margin_top' => array(
+            'selector' => '.section-title',
+            'property' => 'margin-top',
+        ),
+        'margin_bottom' => array(
+            'selector' => '.section-title',
+            'property' => 'margin-bottom',
+        ),
+        'padding' => array(
+            'selector' => '.section-title',
+            'property' => 'padding',
+        ),
+        'width' => array(
+            'selector' => '.section-title',
+            'property' => 'max-width',
+        ),
+        'b_border_width'  => array(
+            'selector' => '.section-title',
+            'property' => 'border-bottom-width',
+            'unit'     => 'px',
+        ),
+        'b_border_color'   => array(
+            'selector' => '.section-title',
+            'property' => 'border-bottom-color',
+        ),
+        'box_margin' => array(
+            'selector' => '.section-title-main',
+            'property' => 'margin',
+        ),
+        'box_padding' => array(
+            'selector' => '.section-title-main',
+            'property' => 'padding',
+        ),
+        'm_border_width'  => array(
+            'selector' => '.section-title-main',
+            'property' => 'border-bottom-width',
+            'unit'     => 'px',
+        ),
+        'm_border_color'   => array(
+            'selector' => '.section-title-main',
+            'property' => 'border-bottom-color',
+        ),
+        'color'   => array(
+            'selector' => '.section-title-main',
+            'property' => 'color',
+        ),
+        'box_color'   => array(
+            'selector' => '.section-title-main',
+            'property' => 'background',
+        ),
+        'box_radius'   => array(
+            'selector' => '.section-title-main',
+            'property' => 'border-radius',
+            'unit' => 'px',
+        ),
+        'b_height' => array(
+            'selector' => '.section-title > b',
+            'property' => 'height',
+        ),
+        'b_bg_color' => array(
+            'selector' => '.section-title > b',
+            'property' => 'background',
+        ),
+        'b_opacity' => array(
+            'selector' => '.section-title > b',
+            'property' => 'opacity',
+        ),
+    );
+    if($size !== '100'){
+        $args = array_merge( $args, array(
+            'size' => array(
+                'selector' => '.section-title-main',
+                'property' => 'font-size',
+                'unit'     => '%',
+            ),
+        ) );
+    }
+    echo ux_builder_element_style_tag($_id, $args, $atts);
+    return '<div id="' . esc_attr( $_id ) . '" class="' . esc_attr( $classes ) . '" ' . get_shortcode_inline_css($css_args) . '><'. $tag_name . ' class="section-title section-title-' . esc_attr( $style ) . '"><b ' . get_shortcode_inline_css($css_b1) . '></b><span class="section-title-main">' . wp_kses_post( $link_all ) . '</span><b ' . get_shortcode_inline_css($css_b2) . '></b>' . $link_output . '</' . $tag_name . '></div>';
 }
 add_shortcode('title', 'uxf_title_shortcode');

@@ -3,8 +3,8 @@ Contributors: wpvncom
 Donate link: https://www.paypal.me/copvn
 Tags: flatsome, element flatsome, ux flatsome, uxflat, flatux
 Requires at least: 6.2
-Tested up to: 6.6.2
-Stable tag: 5.3.3
+Tested up to: 6.7.2
+Stable tag: 5.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,16 @@ You can install the UX Flat from your WordPress Dashboard or manually via FTP.
 2. Easily enable function with a single click.
 
 == Changelog ==
+
+= 5.4.0 =
+NEW: WooCommerce 9.9.5 compatibility.
+FIX: Yoast SEO compatibility.
+
+= 5.3.4 =
+FIX: Element Featured Box
+FIX: Element Menu
+FIX: Element Follow
+FIX: Fl Icons
 
 = 5.3.3 =
 NEW: WooCommerce 9.3.2 compatibility.

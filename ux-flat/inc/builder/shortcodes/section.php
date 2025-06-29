@@ -4,13 +4,14 @@ add_ux_builder_shortcode( 'section', array(
 	'type'      => 'container',
 	'name'      => __( 'Section', 'ux-builder' ),
 	'category'  => __( 'Layout' ),
-	'template'  => flatsome_uxf_builder_template( 'section.html' ),
+	'template'  => uxf_builder_template( 'section.html' ),
     'thumbnail' => get_template_directory_uri() . '/inc/builder/shortcodes/thumbnails/section.svg',
 	'wrap'      => false,
 	'info'      => '{{ label }}',
 	'priority'  => -1,
 	'styles'    => array(
-        'uxf-effect' => UXF_URL . 'assets/css/effect.min.css',
+		'flatsome-banner-effect' => get_template_directory_uri() . '/assets/css/effects.css',
+        'effectcss' => UXF_URL . 'assets/css/effect.min.css',
 	),
 	'presets' => array(
 		array(
@@ -112,7 +113,7 @@ add_ux_builder_shortcode( 'section', array(
 			'placeholder' => 'Enter admin label...',
 		),
 
-        'background_options' => require( UXF_PATH . '/inc/builder/shortcodes/commons/background.php' ),
+        'background_options' => require( UXF_DIR . '/inc/builder/shortcodes/commons/background.php' ),
 		'layout_options'     => array(
 			'type'    => 'group',
 			'heading' => __( 'Layout' ),

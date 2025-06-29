@@ -3,6 +3,13 @@
 /**
  * [button]
  */
+// Register scripts
+function uxf_button_scripts() {
+    wp_register_style('hovercss', plugins_url('/assets/css/hover.min.css', UXF_FILE), [], null);
+    wp_register_style('ihovercss', plugins_url('/assets/css/ihover.min.css', UXF_FILE), [], null);
+}
+add_action('wp_enqueue_scripts', 'uxf_button_scripts');
+
 function uxf_button_shortcode( $atts, $content = null ) {
 	extract( shortcode_atts( array(
 		'text'        => '',
@@ -27,44 +34,26 @@ function uxf_button_shortcode( $atts, $content = null ) {
 		'depth_hover' => '',
 		'class'       => '',
 		'visibility'  => '',
-		'id'          => '',
+		'id'          => 'btn-' . wp_rand(),
 		'block'       => '',
+		//UXF
 		'weight'      => '',
-		//Animate
-		'ani'     => '',
-		'ani_infinite'     => '',
-		'ani_repeat'     => '',
-		'ani_delay'     => '',
-		'ani_duration'     => '',
-		'ani_dynamic'     => '',
-		'ani_text'     => '',
-		//Box Hover
 		'hover'     => '',
-		'box_hover' => '',
-		'box_cover'     => '',
-		'box_bg'     => '',
-		'box_border'     => '',
+		'icon_hover'    => '',
 		'text_color'       => '',
 		'bg_color'       => '',
 		'bg_gradient'       => '',
 		'bg_gradient_to'       => 'left',
 		'border_style'       => '',
 		'border_color'       => '',
-		'border_width'       => '',
-		'outline_style'       => '',
-		'outline_color'       => '',
-		'outline_width'       => '',
 		'letter_spacing' => '',
 		'icon_custom'    => '',
+		'icon_size'    => '',
 		'onclick' => '',
 	), $atts ) );
 
-    // Ani CSS
-	if($ani) {
-        wp_enqueue_style( 'uxf-animate');
-        wp_enqueue_script( 'uxf-anidynamic');
-    }
-	if($box_hover) wp_enqueue_style( 'uxf-hover');
+	if($hover) wp_enqueue_style( 'hovercss');
+	if($icon_hover) wp_enqueue_style( 'ihovercss');
 
 	// Old button Fallback.
 	if ( strpos( $style, 'primary' ) !== false ) {
@@ -84,7 +73,7 @@ function uxf_button_shortcode( $atts, $content = null ) {
 	}
 
 	$attributes = array();
-    if ($icon == 'custom') $icon = $icon_custom;
+    if ($icon == "custom") $icon = $icon_custom;
     
 	// Add Button Classes.
 	$classes   = array();
@@ -111,11 +100,14 @@ function uxf_button_shortcode( $atts, $content = null ) {
 	if ( $letter_case ) {
 		$classes[] = $letter_case;
 	}
-	if ( $icon_reveal ) {
+	if ( $icon && $icon_reveal ) {
 		$classes[] = 'reveal-icon';
 	}
 	if ( $expand ) {
 		$classes[] = 'expand';
+	}
+	if ( !$text ) {
+		$classes[] = 'icon';
 	}
 	if ( $class ) {
 		$classes[] = $class;
@@ -125,9 +117,6 @@ function uxf_button_shortcode( $atts, $content = null ) {
 	}
 	if ( $animate ) {
 		$attributes['data-animate'] = $animate;
-	}
-	if ( $target == '_blank' ) {
-		$attributes['rel'][] = 'noopener noreferrer';
 	}
 	if ( $rel ) {
 		$attributes['rel'][] = $rel;
@@ -142,93 +131,83 @@ function uxf_button_shortcode( $atts, $content = null ) {
 	}
 	if ( $tooltip ) {
 		$classes[]           = 'has-tooltip';
-		$attributes['title'] = $tooltip;
+		$attributes['title'] = wp_kses_post( $tooltip );
 	}
-
-	if($box_hover) {
-        $classes[] = 'hvr-'.$box_hover;
+	if($hover) {
+        $classes[] = 'hvr-'.$hover;
     }
-	if($ani) {
-        $classes[] = 'ani_'.$ani.' animate__animated animate__'.$ani;
+	if($icon_hover) {
+        $classes[] = 'ihvr-'.$icon_hover;
+        $icon .= ' ihvr-icon';
     }
-	if($ani_dynamic) {
-        if ( ! is_array( $ani_dynamic ) ) {
-            $ani_dynamic = explode( ',', $ani_dynamic );
-        }
-        foreach ( $ani_dynamic as $key => $value ) {
-            $classes[] = $value;
-        }
-    }
-	if($ani_text) {
-        $classes[] = 'aniCus_text-'.$ani;
-    } 
-	if($ani_infinite) {
-        $classes[] = 'animate__infinite';
-    }
-	if($ani_repeat) {
-        $classes[] = 'animate__repeat-'.$ani_repeat;
-    }
-	if($ani_delay) {
-        $classes[] = 'animate__delay-'.$ani_delay.'s';
-    }
-	if($ani_duration) {
-        $classes[] = 'animate__'.$ani_duration;
-    }
-
-	$styles = array(
-		array(
-			'unit'      => 'px!important',
-			'attribute' => 'border-radius',
-			'value'     => intval( $radius ),
-		),
-		array(
-			'unit'      => 'px',
-			'attribute' => 'border-width',
-			'value'     => intval( $border ),
-		),
-		array(
-			'unit'      => 'px',
-			'attribute' => 'letter-spacing',
-			'value'     => intval( $letter_spacing ),
-		),
-		array(
-			'attribute' => 'padding',
-			'value'     => esc_attr($padding),
-		),
-		array(
-			'attribute' => 'color',
-			'value'     => esc_attr($text_color),
-		),
-		array(
-            'attribute' => 'background',
-            'value'     => ($bg_gradient ? 'linear-gradient(to right, '.esc_attr($bg_color).' 0%, '.esc_attr($bg_gradient).'  51%, '.esc_attr($bg_color).'  100%); transition: 0.5s; background-size: 200% auto' : esc_attr($bg_color)),
-        ),
-        array(
-            'attribute' => 'border',
-            'value'     => ($border_style ? esc_attr($border_width).' '.esc_attr($border_style).' '.esc_attr($border_color) : ''),
-        ),
-        array(
-            'attribute' => 'outline',
-            'value'     => ($outline_width ? esc_attr($outline_width).' '.esc_attr($outline_style).' '.esc_attr($outline_color) : ''),
-        ),
-	);
-
 	$classes    = implode( ' ', $classes );
-	//$attributes          = flatsome_html_atts( $attributes );
 	ob_start();
-
 	?>
-	<a <?php echo flatsome_html_atts( $attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="<?php echo esc_attr( $classes ); ?>" <?php if($onclick) echo 'onclick="'.esc_attr($onclick).'"'; ?> <?php echo get_shortcode_inline_css($styles); ?>>
+	<a id="<?php echo esc_attr($id); ?>" <?php echo flatsome_html_atts( $attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="<?php echo esc_attr( $classes ); ?>" <?php if($onclick) echo 'onclick="'.esc_attr($onclick).'"'; ?>>
             <?php if (($icon_left  = $icon) && ($icon_pos == 'left')) { ?>
-                <?php echo get_flatsome_icon( $icon, null, array( 'aria-hidden' => 'true' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                <?php echo get_flatsome_icon( $icon, null, array( 'aria-hidden' => 'true'  ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             <?php } ?>
-			<span><?php echo esc_attr($text); ?></span>
+            <?php if ($text) echo '<span>'. esc_attr($text). '</span>'; ?>
             <?php if (($icon_right  = $icon) && ($icon_pos !== 'left')) { ?>
                 <?php echo get_flatsome_icon( $icon, null, array( 'aria-hidden' => 'true' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             <?php } ?>
 	</a>
+    <?php
+        // Get custom CSS
+        $args = array(
+            'radius' => array(
+                'selector' => '',
+                'property' => 'border-radius',
+                'unit'     => 'px',
+                'important' => true,
+            ),
+            'border'  => array(
+                'selector' => '',
+                'property' => 'border-width',
+                'unit'     => 'px',
+            ),
+            'border_style'  => array(
+                'selector' => '',
+                'property' => 'border-style',
+            ),
+            'border_color'   => array(
+                'selector' => '',
+                'property' => 'border-color',
+            ),
+            'letter_spacing'  => array(
+                'selector' => '',
+                'property' => 'letter-spacing',
+                'unit'     => 'px',
+            ),
+            'padding'   => array(
+                'selector' => '',
+                'property' => 'padding',
+            ),
+            'text_color'   => array(
+                'selector' => '',
+                'property' => 'color',
+            ),
+            'bg_color'   => array(
+                'selector' => '',
+                'property' => 'background',
+            ),
+            'icon_size'  => array(
+                'selector' => '>i',
+                'property' => 'font-size',
+                'unit'     => 'px',
+            ),
+        );
+        echo ux_builder_element_style_tag($id, $args, $atts);
+      ?>
 	<?php if($bg_gradient){ ?>
-        <style>.gradientbtn:hover{background-position: right center !important;}</style>
+    <style>
+        #<?php echo esc_attr($id); ?> {
+            background: linear-gradient(to right, <?php echo esc_attr($bg_color); ?> 0%, <?php echo esc_attr($bg_gradient); ?>  51%, <?php echo esc_attr($bg_color); ?>  100%); transition: 0.5s; background-size: 200% auto !important;
+        }
+        #<?php echo esc_attr($id); ?>:hover {
+            background-position: right center !important;
+        }
+    </style>
     <?php }
     return ob_get_clean();
 }

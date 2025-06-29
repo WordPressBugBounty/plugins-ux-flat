@@ -1,5 +1,11 @@
 <?php
 
+// Register scripts
+function uxf_typed_scripts() {
+    wp_register_script('typedjs', plugins_url('/inc/shortcodes/ux_typed/typed.umd.js', UXF_FILE), [], null, false);
+}
+add_action('wp_enqueue_scripts', 'uxf_typed_scripts');
+
 function flatsome_render_ux_typed_shortcode( $atts, $content = null ) {
     extract( shortcode_atts( array(
 		'id'        => 'typed_' . wp_rand(),

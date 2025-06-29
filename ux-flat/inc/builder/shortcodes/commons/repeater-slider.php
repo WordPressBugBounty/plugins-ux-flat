@@ -4,6 +4,23 @@ return array(
 'heading' => __( 'Slider' ),
 'conditions' => 'type === "slider" || type === "slider-full"',
 'options' => array(
+'slide_width' => array(
+	'type' => 'scrubfield',
+	'responsive' => true,
+	'heading' => 'Slide Width',
+	'placeholder' => 'Width in Px',
+	'default' => '',
+	'min' => '0',
+	'conditions' => 'type !== "fade" && type === "slider-full"',
+),
+'slide_rows' => array(
+    'type' => 'slider',
+    'heading' => __( 'Slide Rows' ),
+    'default' => '',
+    'max' => '10',
+    'min' => '1',
+	'conditions' => 'type === "slider-full"',
+),
 'slider_nav_style' => array(
     'type' => 'select',
     'heading' => "Nav Style",
@@ -51,35 +68,6 @@ return array(
         '6000' => '6 sec.',
         '7000' => '7 sec.',
     )
-),
-'slide_style' => array(
-  'type' => 'select',
-  'heading' => 'Slide Style',
-  'default' => 'normal',
-  'options' => array(
-      'normal' => 'Default',
-      'container' => 'Container',
-      'focus' => 'Focus',
-      'shadow' => 'Shadow',
-  ),
-),
-'slide_width' => array(
-  'type' => 'scrubfield',
-  'responsive' => true,
-  'heading' => 'Slide Width',
-  'placeholder' => 'Width in Px',
-  'default' => '',
-  'min' => '0',
-),
-'slide_align' => array(
-  'type' => 'select',
-  'heading' => 'Slide Align',
-  'default' => 'center',
-  'options' => array(
-      'center' => 'Center',
-      'left' => 'Left',
-      'right' => 'Right',
-  ),
 ),
 'infinitive'          => array(
 	'type'    => 'select',

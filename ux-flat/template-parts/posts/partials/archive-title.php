@@ -16,7 +16,7 @@
         'taxonomy' => 'category',
         'child_of' => $curcat->term_id,
     )); ?>
-    <?php if ( get_theme_mod('uxf_cat_sub', 0) && is_category() && $subcats ) { ?>
+    <?php if ( get_theme_mod('blog_archive_subcat', 0) && is_category() && $subcats ) { ?>
     <ul class="header-nav header-nav-main nav nav-center">
     <li class="header-vertical-menu" role="navigation">
         <div class="header-vertical-menu__opener white" style="width: auto;">
@@ -93,7 +93,7 @@
 	</h1>
     <?php } ?>
 	<?php
-        if ( get_theme_mod( 'uxf_meta_desc', 0 ) && get_theme_mod( 'blog_archive_title', 1 ) ) {
+        if ( get_theme_mod( 'blog_archive_meta', 0 ) && get_theme_mod( 'blog_archive_title', 1 ) ) {
             if ( is_category() ) :
                 $category_description = category_description();
                 $category_rankmath = get_term_meta(get_queried_object_id(), 'rank_math_description', true);
@@ -104,12 +104,12 @@
                     $category_description = $category_yoast;
                 }
                 if ( ! empty( $category_description ) ) :
-                    echo apply_filters( 'category_archive_meta', '<div class="taxonomy-description">' . $category_description . '</div>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo apply_filters( 'category_archive_meta', '<div class="row"><div class="large-12 col">' . $category_description . '</div></div>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 endif;
             elseif ( is_tag() ) :
                 $tag_description = tag_description();
                 if ( ! empty( $tag_description ) ) :
-                    echo apply_filters( 'tag_archive_meta', '<div class="taxonomy-description">' . $tag_description . '</div>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo apply_filters( 'tag_archive_meta', '<div class="row"><div class="large-12 col">' . $tag_description . '</div></div>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 endif;
             endif;
         }
